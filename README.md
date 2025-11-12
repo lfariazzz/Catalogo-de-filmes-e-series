@@ -9,7 +9,7 @@ Projeto baseado no **Tema 10 — Catálogo de Filmes e Séries**, da disciplina 
 
 O sistema é orientado a objetos e estruturado com base no **diagrama UML** a seguir, que representa as classes principais e seus relacionamentos de herança, agregação e composição:
 
-![Diagrama UML do Catálogo de Filmes e Séries](docs/uml_catalogo_midias.png)
+![Diagrama UML do Catálogo de Filmes e Séries](uml_catalogo_midias.png)
 
 ### 🧩 Descrição das Classes
 
