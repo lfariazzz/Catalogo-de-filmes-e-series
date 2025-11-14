@@ -1,7 +1,8 @@
 class Midia:
-    def __init__(self,id, titulo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas):
+    def __init__(self,id, titulo, tipo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas):
         self.id = id
         self.titulo = titulo
+        self.tipo = tipo
         self.genero = genero
         self.ano = ano
         self.duracao_minutos = duracao_minutos
@@ -9,18 +10,6 @@ class Midia:
         self.elenco = elenco
         self.status = status
         self.notas = notas
-
-    def criar_midia(self):
-        pass
-
-    def ler_midia(self):
-        pass
-
-    def atualizar_midia(self):
-        pass
-
-    def deletar_midia(self):
-        pass
 
     def calcular_media(self):
         pass
@@ -35,7 +24,4 @@ class Midia:
         pass
 
     def __lt__(self):
-        pass
-
-    def __len__(self):
         pass
