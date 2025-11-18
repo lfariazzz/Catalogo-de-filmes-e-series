@@ -64,7 +64,7 @@ catalogo-de-filmes-e-series/
 ├── main.py               # Arquivo principal para execução do sistema
 ├── dados.py              # Módulo de funções para persistência (salvar/carregar JSON)
 │
-├── models/               # Pacote contendo as classes do sistema
+├── classes/               # Pacote contendo as classes do sistema
 │   ├── midia.py
 │   ├── filme.py
 │   ├── serie.py
