@@ -13,17 +13,16 @@ O sistema é orientado a objetos e estruturado com base no **diagrama UML** a se
 
 ### 🧩 Descrição das Classes
 
-- **Midia** → Classe base para `Filme` e `Serie`.
-  Contém informações comuns como título, gênero, ano, duração, elenco, classificação indicativa, status e notas.
-- **Filme** → Herda de `Midia`, representando um filme individual.
-- **Serie** → Herda de `Midia`, agregando várias `Temporada` e calculando automaticamente sua nota média.
-- **Temporada** → Representa uma temporada de uma série, composta por vários episódios.
-- **Episodio** → Contém número, título, duração, data de lançamento, status e nota opcional.
-- **Usuario** → Armazena dados do usuário, suas listas personalizadas e histórico de mídias assistidas.
-- **ListaPersonalizada** → Coleção de mídias criada pelo usuário (ex: “Favoritos”, “Assistir depois”).
-- **Historico** → Container que agrupa todos os registros de visualização do usuário e gera relatórios estatísticos.
-- **RegistroVisualizacao** → Representa um item individual do histórico (qual mídia foi assistida, data e nota).
-- **Configuracao** → Gerencia parâmetros globais do sistema definidos em `settings.json`.
+- **Midia** → Classe base responsável pelo registro de filmes e séries do catálogo.
+- **Filme** → Herda de `Midia`, sendo responsável pelo controle das mídias classificadas como filme.
+- **Serie** → Herda de `Midia`, sendo responsável pelo controle das mídias classificadas como série e suas temporadas.
+- **Temporada** → Controla os atributos de temporada das mídias de séries.
+- **Episodio** → Responsável pelo controle de episódios que se agregam à classe de temporada.
+- **Usuario** → Responsável pelo controle de configurações e dados individuais do usuário.
+- **ListaPersonalizada** → Responsável pela representação de listas personalizadas de mídias para cada usuário.
+- **Historico** → Responsável por receber e armazenar os registros de conclusão de visualização das mídias.
+- **RegistroVisualizacao** → Responsável por armazenar as instâncias (dados) do que será salvo no histórico.
+- **Configuracao** → Responsável pelo controle de algumas configurações de limite e estado do sistema.
 
 
 ---
