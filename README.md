@@ -9,7 +9,7 @@ Projeto baseado no **Tema 10 — Catálogo de Filmes e Séries**, da disciplina 
 
 O sistema é orientado a objetos e estruturado com base no **diagrama UML** a seguir, que representa as classes principais e seus relacionamentos de herança, agregação e composição:
 
-![Diagrama UML das Classes](docs/uml_catalogo_midias.png)
+![Diagrama UML das Classes](./docs/uml_catalogo_midias.png.png)
 
 ### 🧩 Descrição das Classes
 
@@ -58,12 +58,13 @@ O sistema é orientado a objetos e estruturado com base no **diagrama UML** a se
 ## 🧠 Organização do Projeto
 A estrutura de diretórios do projeto segue o padrão modular da Programação Orientada a Objetos, facilitando a manutenção e o reuso de código.
 
+```text
 catalogo-de-filmes-e-series/
 │
 ├── main.py               # Arquivo principal para execução do sistema
 ├── dados.py              # Módulo de funções para persistência (salvar/carregar JSON)
 │
-├── classes/               # Pacote contendo as classes do sistema
+├── models/               # Pacote contendo as classes do sistema
 │   ├── midia.py
 │   ├── filme.py
 │   ├── serie.py
@@ -84,4 +85,3 @@ catalogo-de-filmes-e-series/
 │   └── uml_catalogo_midias.png
 │
 └── README.md             # Documentação geral do projeto
-
