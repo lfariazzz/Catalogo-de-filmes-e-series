@@ -9,5 +9,5 @@ class Usuario:
     def avaliar_midia(self, midia, nota):
         pass
 
-    def criar_lista(self):
+    def criar_lista(self, id_lista, nome, descricao):
         pass

@@ -5,7 +5,7 @@ class Historico:
         self.id_historico = id_historico
         self.registros = registros if registros is not None else []
         
-    def registrar_conclusao(self):
+    def registrar_conclusao(self, midia, data_visualizacao, nota_atribuida):
         pass
 
     def gerar_relatorio(self):
