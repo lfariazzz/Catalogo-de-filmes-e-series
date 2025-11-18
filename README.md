@@ -9,11 +9,11 @@ Projeto baseado no **Tema 10 — Catálogo de Filmes e Séries**, da disciplina 
 
 O sistema é orientado a objetos e estruturado com base no **diagrama UML** a seguir, que representa as classes principais e seus relacionamentos de herança, agregação e composição:
 
-<img width="1294" height="935" alt="image" src="https://github.com/user-attachments/assets/8f086bac-ab81-4661-81a5-025923b4bc7e" />
+![Diagrama UML das Classes](docs/uml_catalogo_midias.png)
 
 ### 🧩 Descrição das Classes
 
-- **Midia** → Classe base para `Filme` e `Serie`.  
+- **Midia** → Classe base para `Filme` e `Serie`.
   Contém informações comuns como título, gênero, ano, duração, elenco, classificação indicativa, status e notas.
 - **Filme** → Herda de `Midia`, representando um filme individual.
 - **Serie** → Herda de `Midia`, agregando várias `Temporada` e calculando automaticamente sua nota média.
@@ -21,7 +21,8 @@ O sistema é orientado a objetos e estruturado com base no **diagrama UML** a se
 - **Episodio** → Contém número, título, duração, data de lançamento, status e nota opcional.
 - **Usuario** → Armazena dados do usuário, suas listas personalizadas e histórico de mídias assistidas.
 - **ListaPersonalizada** → Coleção de mídias criada pelo usuário (ex: “Favoritos”, “Assistir depois”).
-- **Historico** → Registra as mídias assistidas, progresso, notas e gera relatórios estatísticos.
+- **Historico** → Container que agrupa todos os registros de visualização do usuário e gera relatórios estatísticos.
+- **RegistroVisualizacao** → Representa um item individual do histórico (qual mídia foi assistida, data e nota).
 - **Configuracao** → Gerencia parâmetros globais do sistema definidos em `settings.json`.
 
 
@@ -59,26 +60,28 @@ A estrutura de diretórios do projeto segue o padrão modular da Programação O
 
 catalogo-de-filmes-e-series/
 │
-├── main.py # Arquivo principal para execução do sistema
+├── main.py               # Arquivo principal para execução do sistema
+├── dados.py              # Módulo de funções para persistência (salvar/carregar JSON)
 │
-├── models/ # Pacote contendo as classes do sistema
-│ ├── midia.py
-│ ├── filme.py
-│ ├── serie.py
-│ ├── temporada.py
-│ ├── episodio.py
-│ ├── usuario.py
-│ ├── lista_personalizada.py
-│ ├── historico.py
-│ └── configuracao.py
+├── classes/               # Pacote contendo as classes do sistema
+│   ├── midia.py
+│   ├── filme.py
+│   ├── serie.py
+│   ├── temporada.py
+│   ├── episodio.py
+│   ├── usuario.py
+│   ├── lista_personalizada.py
+│   ├── historico.py
+│   ├── registro_visualizacao.py
+│   └── configuracao.py
 │
-├── data/ # Armazena arquivos de dados e configurações
-│ ├── midias.json
-│ ├── usuarios.json
-│ └── settings.json
+├── data/                 # Armazena arquivos de dados e configurações
+│   ├── midias.json
+│   ├── usuarios.json
+│   └── settings.json
 │
-├── docs/ # Documentação do projeto
-│ └── uml_catalogo_midias.png
+├── docs/                 # Documentação do projeto
+│   └── uml_catalogo_midias.png
 │
-└── README.md # Documentação geral do projeto
+└── README.md             # Documentação geral do projeto
 
