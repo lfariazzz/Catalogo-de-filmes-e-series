@@ -1,4 +1,4 @@
-from registro_visualizacao import RegistroVisualizacao
+from classes.registro_visualizacao import RegistroVisualizacao
 
 class Historico:
     """Classe responsável por receber registros de conclusão de visualização das mídias"""

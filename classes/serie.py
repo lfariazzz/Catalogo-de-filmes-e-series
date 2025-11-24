@@ -1,5 +1,5 @@
-from midia import Midia
-from temporada import Temporada
+from classes.midia import Midia
+from classes.temporada import Temporada
 from typing import List
 
 class Serie(Midia):

@@ -1,4 +1,4 @@
-from midia import Midia
+from classes.midia import Midia
 
 class Filme(Midia):
     """Classe que herda de mídia responsável pelo controle das mídias classificadas como filme"""
