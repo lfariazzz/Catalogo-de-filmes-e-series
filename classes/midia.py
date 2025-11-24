@@ -13,6 +13,29 @@ class Midia:
         self.status = status
         self.notas = notas
 
+    @property
+    def titulo(self):
+        return self._titulo
+    
+    @titulo.setter
+    def titulo(self, valor):
+        if not valor or valor.strip() == "":
+            raise ValueError("O título não pode ser vazio.")
+        else:
+            self._titulo = valor
+
+    @property
+    def duracao_minutos(self):
+        return self._duracao_minutos
+    
+    @duracao_minutos.setter
+    def duracao_minutos(self, valor):
+        if not valor or valor > 10 or valor < 0:
+            raise ValueError("A nota deve estar entre 0 e 10")
+        else:
+            self._duracao_minutos = valor
+
+
     def calcular_media(self):
         """Método responsável pelo cálculo da média da mídia com base nas notas atribuídas"""
         pass
