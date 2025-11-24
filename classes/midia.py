@@ -30,10 +30,26 @@ class Midia:
     
     @duracao_minutos.setter
     def duracao_minutos(self, valor):
-        if not valor or valor > 10 or valor < 0:
-            raise ValueError("A nota deve estar entre 0 e 10")
+        if valor <= 0:
+            raise ValueError("A duração da mídia deve ser maior que 0 minutos")
         else:
             self._duracao_minutos = valor
+
+    @property
+    def notas(self):
+        return self._notas
+    
+    @notas.setter
+    def notas(self, valores):
+        if isinstance(valores, list):
+            for valor in valores:
+                if valor > 10 or valor < 0:
+                    raise ValueError("As notas devem estar entre 0 e 10")
+                else:
+                    continue
+            self._notas = valores
+        else:
+            raise TypeError("O atributo notas deve ser uma lista de números")
 
 
     def calcular_media(self):
