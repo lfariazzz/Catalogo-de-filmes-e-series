@@ -62,12 +62,16 @@ class Midia:
 
     def __str__(self):
         """Método responsável por representar de forme legível a exibição do filme"""
-        pass
-
-    def __eq__(self):
+        return f"{self.titulo} ({self.ano}) - {self.tipo}"
+        
+    def __eq__(self, midia2):
         """Método responsável pela comparação de mídias para conferência de duplicidade"""
-        pass
+        if isinstance(midia2, Midia):
+            return self.titulo == midia2.titulo and self.tipo == midia2.tipo
+        else:
+            return False
 
-    def __lt__(self):
-        """Método responsável por ordenação para organização dos filmes com base em requisitos"""
-        pass
+    def __lt__(self, midia2):
+        """Método responsável por ordenação em notas médias para organização das mídias"""
+        if isinstance(midia2, Midia):
+            return self.media < midia2.media
