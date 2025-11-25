@@ -74,7 +74,7 @@ class Midia:
             else:
                 self._ano = valor
         else:
-            raise ValueError("Selecione um ano válido")
+            raise TypeError("Selecione um ano válido (deve ser inteiro).")
 
     @property
     def duracao_minutos(self):
@@ -106,7 +106,7 @@ class Midia:
     @elenco.setter
     def elenco(self, valores):
         if not isinstance(valores, list):
-            raise ValueError("O elenco deve ser uma lista.")
+            raise TypeError("O elenco deve ser uma lista.")
         else:
             for valor in valores:
                 if not isinstance(valor, str):
