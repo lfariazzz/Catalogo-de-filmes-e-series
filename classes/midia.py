@@ -3,14 +3,22 @@ class Midia:
     def __init__(self,id, titulo, tipo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas):
         """Método responsável pela inicialização da classe"""
         self.id = id
+        self._titulo = None
         self.titulo = titulo
         self.tipo = tipo
+        self._genero = None
         self.genero = genero
+        self._ano = None
         self.ano = ano
+        self._duracao_minutos = None
         self.duracao_minutos = duracao_minutos
+        self._classificacao_indicativa = None
         self.classificacao_indicativa = classificacao_indicativa
+        self._elenco = None
         self.elenco = elenco
+        self._status = None
         self.status = status
+        self._notas = []
         self.notas = notas
 
     @property
@@ -25,6 +33,50 @@ class Midia:
             self._titulo = valor
 
     @property
+    def genero(self):
+        return self._genero
+    
+    @genero.setter
+    def genero(self, valor):
+        generos_validos = [
+        "Ação",
+        "Aventura",
+        "Comédia",
+        "Drama",
+        "Ficção Científica",
+        "Terror",
+        "Romance",
+        "Suspense",
+        "Documentário",
+        "Animação",
+        "Fantasia",
+        "Policial",
+        "Musical"
+        ]
+        if isinstance(valor,str):
+            if valor.title() not in generos_validos:
+                raise ValueError(f"Digite um gênero disponível: \n{generos_validos}")
+            else:
+                self._genero = valor.title()
+        else:
+                raise ValueError(f"Digite um gênero disponível: \n{generos_validos}")
+
+
+    @property
+    def ano(self):
+        return self._ano
+    
+    @ano.setter
+    def ano(self, valor):
+        if isinstance(valor, int):
+            if valor < 1895:
+                raise ValueError("Selecione um ano válido.")
+            else:
+                self._ano = valor
+        else:
+            raise ValueError("Selecione um ano válido")
+
+    @property
     def duracao_minutos(self):
         return self._duracao_minutos
     
@@ -35,6 +87,44 @@ class Midia:
         else:
             self._duracao_minutos = valor
 
+    @property
+    def classificacao_indicativa(self):
+        return self._classificacao_indicativa
+    
+    @classificacao_indicativa.setter
+    def classificacao_indicativa(self, valor):
+        classificacoes_indicativas_validas = ["L", "10", "12", "14", "16", "18"]
+        if str(valor).upper() not in classificacoes_indicativas_validas:
+            raise ValueError(f"Insira uma classificação indicativa válida: {classificacoes_indicativas_validas}")
+        else:
+            self._classificacao_indicativa = valor.upper()
+
+    @property
+    def elenco(self):
+        return self._elenco
+    
+    @elenco.setter
+    def elenco(self, valores):
+        if not isinstance(valores, list):
+            raise ValueError("O elenco deve ser uma lista.")
+        else:
+            for valor in valores:
+                if not isinstance(valor, str):
+                    raise ValueError("O elenco deve conter apenas letras.")
+            self._elenco = valores
+
+    @property
+    def status(self):
+        return self._status
+    
+    @status.setter
+    def status(self, valor):
+        status_validos = ["ASSISTIDO", "ASSISTINDO", "NÃO ASSISTIDO"]
+        if valor.upper() not in status_validos:
+            raise ValueError(f"Insira um status disponível: {status_validos}")
+        else:
+            self._status = valor.upper()
+  
     @property
     def notas(self):
         return self._notas
@@ -50,11 +140,18 @@ class Midia:
             self._notas = valores
         else:
             raise TypeError("O atributo notas deve ser uma lista de números")
-
+        
+    @property
+    def media(self):
+        if not self.notas:
+            return 0
+        else:
+            return sum(self.notas)/len(self.notas)
 
     def calcular_media(self):
         """Método responsável pelo cálculo da média da mídia com base nas notas atribuídas"""
-        pass
+    pass
+#      Método substituido por um property "média"
 
     def atualizar_status(self):
         """Método responsável pela atualização do registro de visualização da série"""
