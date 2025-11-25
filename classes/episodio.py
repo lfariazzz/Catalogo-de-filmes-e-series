@@ -1,12 +1,19 @@
+from datetime import date
+
 class Episodio:
     """Classe que controla os atributos de episódios das mídias de séries"""
     def __init__(self, numero_episodio, titulo, duracao_minutos, data_lancamento, status, nota=None):
         """Método responsável por inicializar a classe"""
+        self._numero_episodio = None
         self.numero_episodio = numero_episodio
+        self._titulo = None
         self.titulo = titulo
+        self._duracao_minutos = None
         self.duracao_minutos = duracao_minutos
         self.data_lancamento = data_lancamento
+        self._status = None
         self.status = status
+        self._nota = None
         self.nota = nota
 
     @property
@@ -21,3 +28,68 @@ class Episodio:
             self._numero_episodio = valor
         else:
             raise ValueError("O número de uma episódio deve ser um valor positivo.")
+    
+    @property
+    def titulo(self):
+        return self._titulo
+    
+    @titulo.setter
+    def titulo(self, valor):
+        if not valor or valor.strip() == "":
+            raise ValueError("O título não pode ser vazio.")
+        else:
+            self._titulo = valor
+
+    @property
+    def duracao_minutos(self):
+        return self._duracao_minutos
+    
+    @duracao_minutos.setter
+    def duracao_minutos(self, valor):
+        if isinstance(valor, (int, float)):
+            if valor <= 0:
+                raise ValueError("A duração da mídia deve ser maior que 0 minutos")
+            else:
+                self._duracao_minutos = valor
+        else:
+            raise TypeError("A duração deve ser um número.")
+        
+    @property
+    def data_lancamento(self):
+        return self._data_lancamento
+    
+    @data_lancamento.setter
+    def data_lancamento(self, valor):
+        if isinstance(valor, date):
+            self._data_lancamento = valor
+        else:
+            raise TypeError("Digite uma data válida: DD/MM/AAAA")
+    
+    @property
+    def status(self):
+        return self._status
+    
+    @status.setter
+    def status(self, valor):
+        status_validos = ["ASSISTIDO", "ASSISTINDO", "NÃO ASSISTIDO"]
+        if valor.upper() not in status_validos:
+            raise ValueError(f"Insira um status disponível: {status_validos}")
+        else:
+            self._status = valor.upper()
+
+    @property
+    def nota(self):
+        return self._nota
+    
+    @nota.setter
+    def nota(self, valor):
+        if valor is not None:
+            if isinstance(valor, (int,float)):
+                if valor > 10 or valor < 0:
+                    raise ValueError("A nota deve estar entre 0 e 10")
+                else:
+                    self._nota = valor
+            else:
+                raise TypeError("A nota deve ser um número")
+        else:
+            self._nota = valor

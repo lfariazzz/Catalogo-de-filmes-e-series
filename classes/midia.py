@@ -82,10 +82,13 @@ class Midia:
     
     @duracao_minutos.setter
     def duracao_minutos(self, valor):
-        if valor <= 0:
-            raise ValueError("A duração da mídia deve ser maior que 0 minutos")
+        if isinstance(valor,(int, float)):
+            if valor <= 0:
+                raise ValueError("A duração da mídia deve ser maior que 0 minutos")
+            else:
+                self._duracao_minutos = valor
         else:
-            self._duracao_minutos = valor
+            raise TypeError("A duração deve ser um número.")
 
     @property
     def classificacao_indicativa(self):
