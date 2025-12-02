@@ -1,5 +1,6 @@
 from classes.registro_visualizacao import RegistroVisualizacao
 from datetime import date
+from midia import Midia
 
 class Historico:
     """Classe responsável por receber registros de conclusão de visualização das mídias"""
@@ -11,6 +12,7 @@ class Historico:
     def registrar_conclusao(self, midia, data_visualizacao, nota_atribuida):
         novo_registro = RegistroVisualizacao(midia, data_visualizacao, "ASSISTIDO", nota_atribuida)
         self.registros.append(novo_registro)
+        midia.status = "ASSISTIDO"
     
     def calcular_tempo_assistido(self, data_inicio, data_fim):
         total_minutos = 0
