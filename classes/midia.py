@@ -175,3 +175,18 @@ class Midia:
         """Método responsável por ordenação em notas médias para organização das mídias"""
         if isinstance(midia2, Midia):
             return self.media < midia2.media
+        
+    def gerar_dicionario(self):
+        return{
+            "id": self.id,
+            "titulo": self.titulo,
+            "tipo": self.tipo,
+            "genero": self.genero,
+            "ano": self.ano,
+            "duracao_minutos": self.duracao_minutos,
+            "classificacao_indicativa": self.classificacao_indicativa,
+            "elenco": self.elenco,
+            "status": self.status,
+            "notas": self.notas,
+            "media": self.media
+        }

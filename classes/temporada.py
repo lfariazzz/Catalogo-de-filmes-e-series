@@ -1,3 +1,5 @@
+from classes.episodio import Episodio
+
 class Temporada:
     """Classe que controla os atributos de temporada das mídias de séries"""
     def __init__(self, numero_temporada, status, episodios = None):
@@ -53,6 +55,12 @@ class Temporada:
             return 0.0
         return sum(notas_validas) / len(notas_validas)
         
+    def gerar_dicionario(self):
+        return{
+            "numero_temporada": self.numero_temporada,
+            "status": self.status,
+            "episodios": [episodio.gerar_dicionario() for episodio in self.episodios]
+        }
 
     def registrar_episodio(self, episodio):
         """Método responsável pela criação de instâncias da classe episódio"""

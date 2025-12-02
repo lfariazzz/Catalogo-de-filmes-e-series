@@ -24,7 +24,7 @@ class Serie(Midia):
                     raise TypeError("Insira temporadas válidas.")
             self._temporadas = valores
         else:
-            raise TypeError("Informe uma lista de temporadas.")
+            raise TypeError("Informe suma lista de temporadas.")
 
     def __len__(self):
         """Método responsável pela soma da quantidade de instâncias de episódios em uma temporada"""
@@ -32,3 +32,8 @@ class Serie(Midia):
         for temporada in self.temporadas:
             total_episodios += len(temporada.episodios)
         return total_episodios
+    
+    def gerar_dicionario(self):      
+        dicionario_base = super().gerar_dicionario()
+        dicionario_base["temporadas"] = [temporada.gerar_dicionario() for temporada in self.temporadas]
+        return dicionario_base

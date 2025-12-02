@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "titulo": "Matrix",
+        "tipo": "FILME",
+        "genero": "Ficção Científica",
+        "ano": 1999,
+        "duracao_minutos": 130,
+        "classificacao_indicativa": "14",
+        "elenco": [
+            "Keanu Reeves"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            10,
+            9
+        ],
+        "media": 9.5
+    },
+    {
+        "id": 2,
+        "titulo": "Breaking Bad",
+        "tipo": "SÉRIE",
+        "genero": "Drama",
+        "ano": 2008,
+        "duracao_minutos": 50,
+        "classificacao_indicativa": "18",
+        "elenco": [
+            "Bryan Cranston"
+        ],
+        "status": "ASSISTINDO",
+        "notas": [],
+        "media": 0,
+        "temporadas": [
+            {
+                "numero_temporada": 1,
+                "status": "ASSISTIDO",
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "Piloto",
+                        "duracao_minutos": 50,
+                        "data_lancamento": "2008-01-20",
+                        "status": "ASSISTIDO",
+                        "nota": 9.5
+                    }
+                ]
+            }
+        ]
+    }
+]

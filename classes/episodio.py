@@ -93,3 +93,13 @@ class Episodio:
                 raise TypeError("A nota deve ser um número")
         else:
             self._nota = valor
+
+    def gerar_dicionario(self):
+        return{
+            "numero_episodio": self.numero_episodio,
+            "titulo": self.titulo,
+            "duracao_minutos": self.duracao_minutos,
+            "data_lancamento": self.data_lancamento.isoformat(),
+            "status": self.status,
+            "nota": self.nota
+        }
