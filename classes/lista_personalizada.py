@@ -12,13 +12,12 @@ class ListaPersonalizada:
 
     def adicionar_midia(self, valor):
         if isinstance(valor, Midia):
-            for midia in self.midias:
-                if valor == midia:
-                    raise ValueError("Essa mídia já está na lista")
-                else:
+            if valor in self.midias:
+                    raise ValueError("Essa mídia já está na lista.")
+            else:
                     self.midias.append(valor)
         else:
-            raise TypeError("Você não inseriu uma mídia.")
+            raise TypeError("Você não inseriu uma mídia válida.")
 
 
     def editar_lista(self):
