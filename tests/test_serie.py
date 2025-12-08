@@ -42,3 +42,27 @@ def test_validacao_tipo_temporada_na_serie():
     with pytest.raises(TypeError):
         # Tenta passar uma string "Gato" no lugar de um objeto Temporada
         Serie(1, "Teste", "Drama", 2022, 50, "10", [], "NÃO ASSISTIDO", [], temporadas=["Gato"])
+
+def test_status_automatico_serie():
+    """Testa se a série atualiza o status conforme os episódios são assistidos"""
+    from datetime import date
+    
+    # 1. Arrange: Série com 2 episódios não assistidos
+    ep1 = Episodio(1, "Ep1", 50, date(2022, 1, 1), "NÃO ASSISTIDO")
+    ep2 = Episodio(2, "Ep2", 50, date(2022, 1, 2), "NÃO ASSISTIDO")
+    temp = Temporada(1, "NÃO ASSISTIDO", [ep1, ep2])
+    serie = Serie(1, "Teste", "Drama", 2022, 50, "10", [], "NÃO ASSISTIDO", [], [temp])
+
+    # Caso 1: Nada assistido -> NÃO ASSISTIDA
+    serie.verificar_status_automatico()
+    assert serie.status == "NÃO ASSISTIDO"
+
+    # Caso 2: Assiste o primeiro -> ASSISTINDO
+    ep1.status = "ASSISTIDO" # Usuário assistiu um
+    serie.verificar_status_automatico() # Recalcula
+    assert serie.status == "ASSISTINDO"
+
+    # Caso 3: Assiste o último -> ASSISTIDA
+    ep2.status = "ASSISTIDO" # Usuário terminou tudo
+    serie.verificar_status_automatico() # Recalcula
+    assert serie.status == "ASSISTIDO"

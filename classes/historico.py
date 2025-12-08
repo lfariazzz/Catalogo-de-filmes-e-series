@@ -1,6 +1,6 @@
 from classes.registro_visualizacao import RegistroVisualizacao
 from datetime import date
-from midia import Midia
+from classes.midia import Midia
 
 class Historico:
     """Classe responsável por receber registros de conclusão de visualização das mídias"""

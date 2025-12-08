@@ -37,3 +37,19 @@ class Serie(Midia):
         dicionario_base = super().gerar_dicionario()
         dicionario_base["temporadas"] = [temporada.gerar_dicionario() for temporada in self.temporadas]
         return dicionario_base
+    
+    def verificar_status_automatico(self):
+        episodios_totais = 0
+        episodios_assistidos = 0
+
+        for temporada in self.temporadas:
+            for episodio in temporada.episodios:
+                episodios_totais += 1
+                if episodio.status == "ASSISTIDO":
+                    episodios_assistidos += 1
+        if episodios_assistidos == 0:
+            self.status = "NÃO ASSISTIDO"
+        elif episodios_assistidos > 0 and episodios_assistidos < episodios_totais:
+            self.status = "ASSISTINDO"
+        elif episodios_totais == episodios_assistidos:
+            self.status = "ASSISTIDO"
