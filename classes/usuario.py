@@ -1,3 +1,6 @@
+from classes.lista_personalizada import ListaPersonalizada
+from datetime import date
+
 class Usuario:
     """Classe responsável pelo controle de configurações e dados individuais do usuário"""
     def __init__(self, id, nome, email, listas = None, historico = None):
@@ -33,10 +36,15 @@ class Usuario:
         else:
              self._email = valor
 
+
+    def criar_lista(self, nome, descricao):
+        """Método responsável pela criação de listas personalizadas e individuais de mídias para cada usuário"""
+        id_lista = len(self.listas) + 1
+        data_criacao = date.today()
+        nova_lista = ListaPersonalizada(id_lista, nome, descricao, data_criacao)
+        self.listas.append(nova_lista)
+        return nova_lista
+
     def avaliar_midia(self, midia, nota):
         """Método responsável pelo recebimento de notas acerca da opinião do usuário sobre alguma instância de mídia"""
-        pass
-
-    def criar_lista(self, id_lista, nome, descricao):
-        """Método responsável pela criação de listas personalizadas e individuais de mídias para cada usuário"""
         pass

@@ -4,7 +4,8 @@ from classes.filme import Filme
 from classes.serie import Serie
 from classes.episodio import Episodio
 from classes.temporada import Temporada
-from classes.historico import Historico # <--- IMPORT NOVO
+from classes.historico import Historico
+from classes.usuario import Usuario
 import dados
 
 """Main desenvolvida por IA para testar persistência e relatórios"""
@@ -79,3 +80,25 @@ if __name__ == "__main__":
     # Validação
     print(f"\n>> Esperado: 260 minutos (2x Matrix de 130min).") 
     print(f">> O episódio da série (Março) deve ser ignorado.")
+
+    # ... (códigos anteriores de criação de filmes/séries) ...
+
+    print("\n" + "="*40)
+    print("📋 TESTE 3: LISTAS PERSONALIZADAS")
+    print("="*40)
+
+    # 1. Criar Usuário
+    user = Usuario(1, "Levi", "levi@email.com", [], None)
+
+    # 2. Usuário cria a lista
+    # Perceba que não precisamos dar 'new ListaPersonalizada', o usuário faz isso!
+    lista_fav = user.criar_lista("Favoritos", "Meus filmes preferidos")
+
+    # 3. Adicionar filme na lista (usando o método que criamos antes)
+    # Vamos usar o 'filme1' (Matrix) que já existe no main
+    lista_fav.adicionar_midia(filme1)
+
+    # 4. Verificação
+    print(f"O usuário {user.nome} tem {len(user.listas)} lista(s).")
+    print(f"A lista '{lista_fav.nome}' tem {len(lista_fav.midias)} mídia(s).")
+    print(f"Primeira mídia da lista: {lista_fav.midias[0]}") # Deve imprimir Matrix formatado
