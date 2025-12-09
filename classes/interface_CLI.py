@@ -2,6 +2,7 @@ from classes.midia import Midia
 from datetime import date
 from classes.serie import Serie
 from classes.filme import Filme
+import dados
 import json
 
 def exibir_menu():
@@ -39,17 +40,18 @@ def adicionar_midia(catalogo):
     if filme_ou_serie == 1:
         decisao_midia = "FILME"
         qtd_filmes = len([m for m in catalogo if isinstance(m, Filme)])
-        id = qtd_filmes + 1
+        id = int(f"10{qtd_filmes + 1}")
     elif filme_ou_serie == 2:
         decisao_midia = "SÉRIE"
         qtd_series = len([m for m in catalogo if isinstance(m, Serie)])
-        id = qtd_series + 1
+        id = int(f"20{qtd_series + 1}")
     else:
-        print("Opção inválida")
+        return print("❌ Opção inválida.")
 
+    #Definição do título
     titulo = str(input("Digite o título da mídia: "))
-    nome = titulo
 
+    #Definição do gênero
     genero = str(input("""Digite o gênero da mídia:
 DISPONÍVEIS:
 Ação
@@ -66,11 +68,17 @@ Fantasia
 Policial
 Musical
 DIGITE: """))
-
+    
+    #Definição do ano
     ano = int(input("Digite o ano da mídia: "))
 
-    duracao_minutos = float(input("Digite a duração (em minutos) da mídia: "))
+    #Definição da duração (CASO SEJA FILME)
+    if decisao_midia == "FILME":
+        duracao_minutos = float(input("Digite a duração (em minutos) da mídia: "))
+    elif decisao_midia == "SÉRIE":
+        duracao_minutos = 0
 
+    #Definição da classificação
     classificacao_indicativa = input("""Digite a classificação indicativa da mídia:
 L
 10
@@ -100,4 +108,13 @@ DIGITE: """)
         print("Digite uma opção válida.")
 
     #Criação da mídia
-    nome = Midia(id, titulo, decisao_midia, genero, ano, duracao_minutos, classificacao_indicativa, elenco, "NÃO ASSISTIDO" )
+    #Filme
+    if decisao_midia == "FILME":
+        nova_midia = Filme(id, titulo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, "NÃO ASSISTIDO")
+    #Série
+    elif decisao_midia == "SÉRIE":
+        nova_midia = Serie(id, titulo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, "NÃO ASSISTIDO")
+    #Salvamento no json
+    catalogo.append(nova_midia)
+    dados.salvar_midias(catalogo)
+    print("Mídia adicionada ao catálogo!")

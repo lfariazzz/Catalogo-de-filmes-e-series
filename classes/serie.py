@@ -4,14 +4,27 @@ from typing import List
 
 class Serie(Midia):
     """Classe que herda de mídia responsável pelo controle das mídias classificadas como série"""
-    def __init__(self, id, titulo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas, temporadas=None):
+    def __init__(self, id, titulo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas = None, temporadas = None):
         """Método responsável por inicializar a classe"""
-        super().__init__(id, titulo, "SÉRIE", genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas)
+        super().__init__(id, titulo, "SÉRIE", genero, ano, 0, classificacao_indicativa, elenco, status, notas)
         #Método para definição dos parâmetros que herdam da classe mídia
         self._temporadas = []
         self.temporadas: List[Temporada] = temporadas if temporadas is not None else []
         self.nota_media = 0.0
 
+    @property
+    def duracao_minutos(self):
+        total = 0
+        for temp in self.temporadas:
+            for ep in temp.episodios:
+                total += ep.duracao_minutos
+        return total
+    
+    @duracao_minutos.setter
+    def duracao_minutos(self, valor):
+        pass
+
+    
     @property
     def temporadas(self):
         return self._temporadas

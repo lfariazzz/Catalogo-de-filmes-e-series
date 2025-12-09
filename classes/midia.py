@@ -19,7 +19,7 @@ class Midia:
         self._status = None
         self.status = status
         self._notas = []
-        self.notas = notas if notas is not None else notas = []
+        self.notas = notas if notas is not None else []
 
     @property
     def titulo(self):

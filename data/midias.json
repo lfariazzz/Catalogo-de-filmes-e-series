@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 101,
         "titulo": "Matrix",
         "tipo": "FILME",
         "genero": "Ficção Científica",
@@ -18,7 +18,7 @@
         "media": 9.5
     },
     {
-        "id": 2,
+        "id": 201,
         "titulo": "Breaking Bad",
         "tipo": "SÉRIE",
         "genero": "Drama",
@@ -47,5 +47,21 @@
                 ]
             }
         ]
+    },
+    {
+        "id": 202,
+        "titulo": "Stranger Things",
+        "tipo": "SÉRIE",
+        "genero": "Terror",
+        "ano": 2016,
+        "duracao_minutos": 0,
+        "classificacao_indicativa": "14",
+        "elenco": [
+            "Bobby Millie Brown"
+        ],
+        "status": "NÃO ASSISTIDO",
+        "notas": [],
+        "media": 0,
+        "temporadas": []
     }
 ]
