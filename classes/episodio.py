@@ -103,3 +103,12 @@ class Episodio:
             "status": self.status,
             "nota": self.nota
         }
+    
+    def avaliar_episodio(self, nota):
+        if isinstance(nota, (int,float)):
+            if nota > 10 or nota < 0:
+                raise ValueError("A nota deve estar entre 0 e 10")
+            else:
+                self._nota.append(nota)
+        else:
+            raise TypeError("A nota deve ser um número.")

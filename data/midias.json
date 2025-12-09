@@ -12,10 +12,9 @@
         ],
         "status": "ASSISTIDO",
         "notas": [
-            10,
-            9
+            10.0
         ],
-        "media": 9.5
+        "media": 10.0
     },
     {
         "id": 201,

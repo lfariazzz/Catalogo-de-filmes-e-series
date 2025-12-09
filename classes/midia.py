@@ -191,5 +191,4 @@ class Midia:
             "media": self.media
         }
     
-    def avaliar_midia(self, nota):
-        pass
+    

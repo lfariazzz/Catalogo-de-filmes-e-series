@@ -6,7 +6,7 @@ import dados
 import json
 
 def exibir_menu():
-    print("-" * 50, "🔥🎬ForgeFlix🎬🔥", "-" * 50)
+    print("-" * 43, "🔥🎬ForgeFlix🎬🔥", "-" * 43)
     print("Seja bem vindo ao ForgeFlix, seu catálogo de filmes e séries desenvolvido por Levi Farias.")
     print("Estes são os comando implementados para controle por CLI:")
     print("-" * 30, "🎞️Comando de mídia🎞️", "-" * 30)
@@ -27,9 +27,19 @@ def rodar_sistema():
     catalogo = dados.carregar_midias()
     print(f"✅ {len(catalogo)} mídias carregadas na memória.")
 
+    exibir_menu()
+
     while True:
-        exibir_menu()
-        decisao = int(input("O que deseja fazer? "))
+        entrada = (input("O que deseja fazer? "))        
+        if entrada.upper() == "MENU":
+            exibir_menu()
+            continue
+        try:
+            decisao = int(entrada)
+        except ValueError:
+            print("❌ Comando inválido. Digite um número ou 'MENU'.")
+            continue
+
         if decisao == 0:
             encerrar_programa()
             break
@@ -42,6 +52,8 @@ def rodar_sistema():
         
         else:
             print("Digite uma opção válida")
+
+        print("Digite uma nova opção ou digite menu para exibir o menu novamente")
 
 def exibir_catalogo(catalogo):
     print("-" * 30, "Este é o catálogo disponível no ForgeFlix", "-" * 30)
@@ -143,11 +155,20 @@ DIGITE: """)
 def avaliar_midia(catalogo):
     for midia in catalogo:
         print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    selecao_encontrada = False
     selecao_midia = int(input("Digite o ID da mídia que você quer avaliar: "))
-    if selecao_midia in catalogo:
-        
-    else:
-        raise ValueError("Digite o ID de uma mídia existente.")
+    for midia in catalogo:
+        if midia.id == selecao_midia:
+            selecao_encontrada = True
+            if midia.tipo == "FILME":
+                nota = float(input("Digite a nota que deseja adicionar: "))
+                midia.avaliar_filme(nota)
+                dados.salvar_midias(catalogo)
+            elif midia.tipo == "SÉRIE":
+                print("Avaliação de séries não foram implementadas ainda.")
+            break
+    if not selecao_encontrada:
+        print("❌ ID não encontrado no catálogo.")
 
 def relatorio_midia():
     pass

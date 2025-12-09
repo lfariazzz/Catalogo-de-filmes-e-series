@@ -17,7 +17,7 @@ def salvar_midias(lista_midias):
     try:
         with open(CAMINHO, "w", encoding="utf-8") as arquivo:
             json.dump(lista_dados, arquivo, indent=4, ensure_ascii=False)
-        print("Dados salvos.")
+        print("💾 Dados atualizados no arquivo.")
     except Exception as e:
         print(f"Erro ao salvar{e}")
     
