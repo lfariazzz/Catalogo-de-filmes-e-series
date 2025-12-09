@@ -1,6 +1,6 @@
 class Midia:
     """Classe base responsável pelo registro de filmes e séries do catálogo"""
-    def __init__(self,id, titulo, tipo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas):
+    def __init__(self,id, titulo, tipo, genero, ano, duracao_minutos, classificacao_indicativa, elenco, status, notas = None):
         """Método responsável pela inicialização da classe"""
         self.id = id
         self._titulo = None
@@ -19,7 +19,7 @@ class Midia:
         self._status = None
         self.status = status
         self._notas = []
-        self.notas = notas
+        self.notas = notas if notas is not None else notas = []
 
     @property
     def titulo(self):

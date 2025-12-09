@@ -16,5 +16,4 @@ import json
 
 
 lista_midias = dados.carregar_midias()
-interface_CLI.exibir_menu()
-interface_CLI.exibir_catalogo(lista_midias)
+interface_CLI.adicionar_midia(lista_midias)

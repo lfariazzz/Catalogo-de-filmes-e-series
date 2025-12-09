@@ -1,4 +1,7 @@
 from classes.midia import Midia
+from datetime import date
+from classes.serie import Serie
+from classes.filme import Filme
 import json
 
 def exibir_menu():
@@ -27,13 +30,74 @@ def exibir_catalogo(catalogo):
        for midia in catalogo:
             print(midia)
 
-def adicionar_midia():
+def adicionar_midia(catalogo):
     print("Este é modo de adição de mídias e séries do ForgeFlix:")
-    filme_ou_seroe = input(int("Deseja criar um (1) filme ou uma (2) série? "))
+
+    #Decisão do tipo de mídia e geração do ID
+    filme_ou_serie = int(input("Deseja criar um (1) filme ou uma (2) série? "))
     decisao_midia = None
-    if filme_ou_seroe == 1:
+    if filme_ou_serie == 1:
         decisao_midia = "FILME"
-    elif filme_ou_seroe == 2:
+        qtd_filmes = len([m for m in catalogo if isinstance(m, Filme)])
+        id = qtd_filmes + 1
+    elif filme_ou_serie == 2:
         decisao_midia = "SÉRIE"
+        qtd_series = len([m for m in catalogo if isinstance(m, Serie)])
+        id = qtd_series + 1
     else:
         print("Opção inválida")
+
+    titulo = str(input("Digite o título da mídia: "))
+    nome = titulo
+
+    genero = str(input("""Digite o gênero da mídia:
+DISPONÍVEIS:
+Ação
+Aventura
+Comédia
+Drama
+Ficção Científica
+Terror
+Romance
+Suspense
+Documentário
+Animação
+Fantasia
+Policial
+Musical
+DIGITE: """))
+
+    ano = int(input("Digite o ano da mídia: "))
+
+    duracao_minutos = float(input("Digite a duração (em minutos) da mídia: "))
+
+    classificacao_indicativa = input("""Digite a classificação indicativa da mídia:
+L
+10
+12
+14
+16
+18
+DIGITE: """)
+
+    #Decisão do elenco:
+    elenco_ou_nao = int(input("Deseja adicionar o elenco da mídia? \n (1) Sim \n (2) Não \n DIGITE: "))
+    if elenco_ou_nao == 2:
+        elenco = []    
+    elif elenco_ou_nao == 1:
+        elenco = []
+        artista = str(input("Digite o nome do primeiro artista: \n"))
+        elenco.append(artista)
+        print("Artista Adicionado!")
+        continuar_elenco = int(input("Deseja adicionar mais artistas ao elenco? \n Se sim digite 1: "))
+        while continuar_elenco == 1:
+            artista = str(input("Digite o nome do outro artista artista: \n"))
+            elenco.append(artista)
+            print("Artista Adicionado!")
+            continuar_elenco = int(input("Deseja adicionar mais artistas ao elenco? \n Se sim digite 1: "))
+
+    else:
+        print("Digite uma opção válida.")
+
+    #Criação da mídia
+    nome = Midia(id, titulo, decisao_midia, genero, ano, duracao_minutos, classificacao_indicativa, elenco, "NÃO ASSISTIDO" )
