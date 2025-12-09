@@ -21,7 +21,25 @@ def exibir_menu():
     print("7. Criar Lista personalizada de um Usuário")
     print("8. Adicionar mídia à lista")
     print("0. Encerrar programa")
-    decisao = input("O que deseja fazer? ")
+
+def rodar_sistema():
+    print("🔄 Carregando dados...")
+    catalogo = dados.carregar_midias()
+    print(f"✅ {len(catalogo)} mídias carregadas na memória.")
+
+    while True:
+        exibir_menu()
+        decisao = int(input("O que deseja fazer? "))
+        if decisao == 0:
+            encerrar_programa()
+            break
+        elif decisao == 1:
+            exibir_catalogo(catalogo)
+        elif decisao == 2:
+            adicionar_midia(catalogo)
+        
+        else:
+            print("Digite uma opção válida")
 
 def exibir_catalogo(catalogo):
     print("-" * 30, "Este é o catálogo disponível no ForgeFlix", "-" * 30)
@@ -32,7 +50,7 @@ def exibir_catalogo(catalogo):
             print(midia)
 
 def adicionar_midia(catalogo):
-    print("Este é modo de adição de mídias e séries do ForgeFlix:")
+    print("-" * 30, "Este é modo de adição de mídias e séries do ForgeFlix:", "-" * 30)
 
     #Decisão do tipo de mídia e geração do ID
     filme_ou_serie = int(input("Deseja criar um (1) filme ou uma (2) série? "))
@@ -46,7 +64,8 @@ def adicionar_midia(catalogo):
         qtd_series = len([m for m in catalogo if isinstance(m, Serie)])
         id = int(f"20{qtd_series + 1}")
     else:
-        return print("❌ Opção inválida.")
+        print("❌ Opção inválida.")
+        return 
 
     #Definição do título
     titulo = str(input("Digite o título da mídia: "))
@@ -74,7 +93,7 @@ DIGITE: """))
 
     #Definição da duração (CASO SEJA FILME)
     if decisao_midia == "FILME":
-        duracao_minutos = float(input("Digite a duração (em minutos) da mídia: "))
+        duracao_minutos = int(input("Digite a duração (em minutos) da mídia: "))
     elif decisao_midia == "SÉRIE":
         duracao_minutos = 0
 
@@ -118,3 +137,12 @@ DIGITE: """)
     catalogo.append(nova_midia)
     dados.salvar_midias(catalogo)
     print("Mídia adicionada ao catálogo!")
+
+def avaliar_midia():
+    pass
+
+def relatorio_midia():
+    pass
+
+def encerrar_programa():
+    pass

@@ -13,7 +13,4 @@ from classes.usuario import Usuario
 from datetime import date
 import json
 
-
-
-lista_midias = dados.carregar_midias()
-interface_CLI.adicionar_midia(lista_midias)
+interface_CLI.rodar_sistema()
