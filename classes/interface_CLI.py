@@ -37,6 +37,8 @@ def rodar_sistema():
             exibir_catalogo(catalogo)
         elif decisao == 2:
             adicionar_midia(catalogo)
+        elif decisao == 3:
+            avaliar_midia(catalogo)
         
         else:
             print("Digite uma opção válida")
@@ -138,8 +140,14 @@ DIGITE: """)
     dados.salvar_midias(catalogo)
     print("Mídia adicionada ao catálogo!")
 
-def avaliar_midia():
-    pass
+def avaliar_midia(catalogo):
+    for midia in catalogo:
+        print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    selecao_midia = int(input("Digite o ID da mídia que você quer avaliar: "))
+    if selecao_midia in catalogo:
+        
+    else:
+        raise ValueError("Digite o ID de uma mídia existente.")
 
 def relatorio_midia():
     pass
