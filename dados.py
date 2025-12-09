@@ -22,6 +22,7 @@ def salvar_midias(lista_midias):
         print(f"Erro ao salvar{e}")
     
 def carregar_midias():
+    print("SISTEMA: Carregando dados do sistema")
     try:
         with open(CAMINHO, 'r', encoding='utf-8') as arquivo:
             dados_lidos = json.load(arquivo)
@@ -75,6 +76,7 @@ def carregar_midias():
                         obj_temporadas
                     )
                     catalogo.append(serie)
+            print("SISTEMA: Dados carregados com sucesso")
             return catalogo
 
     except FileNotFoundError:
