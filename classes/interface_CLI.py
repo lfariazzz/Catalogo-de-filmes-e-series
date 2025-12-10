@@ -54,6 +54,8 @@ def rodar_sistema():
             avaliar_midia(catalogo)
         elif decisao == 4:
             atualizar_midia(catalogo)
+        elif decisao == 5:
+            excluir_midia(catalogo)
         
         else:
             print("Digite uma opção válida")
@@ -245,8 +247,26 @@ Digite a opção desejada: """))
                 print("Essa não é uma opção disponível, voltando ao menu principal...")
                 return
             dados.salvar_midias(catalogo)
-            print("💾 Dados salvos no arquivo JSON.")
 
+    if not selecao_encontrada:
+        print("❌ ID não encontrado no catálogo.")
+
+def excluir_midia(catalogo):
+    for midia in catalogo:
+        print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    selecao_encontrada = False
+    selecao_midia = int(input("Digite o ID da mídia que você quer excluir: "))
+    for midia in catalogo:
+        if midia.id == selecao_midia:
+            selecao_encontrada = True
+            confirmacao_exclusao = str(input(f"Tem certeza que deseja excluir {midia.titulo}? (S/N) "))
+            if confirmacao_exclusao.lower() == 's':
+                catalogo.remove(midia)
+                dados.salvar_midias(catalogo)
+                break
+            elif confirmacao_exclusao.lower() == 'n':
+                print("Cancelando operação...")
+                break
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")
 
