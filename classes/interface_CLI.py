@@ -116,8 +116,6 @@ Fantasia
 Policial
 Musical
 DIGITE: """))
-    
-    
 
     #Definição da duração (CASO SEJA FILME)
     if decisao_midia == "FILME":
