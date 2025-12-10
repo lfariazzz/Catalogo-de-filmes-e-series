@@ -38,7 +38,7 @@ def carregar_midias():
                         midia['classificacao_indicativa'],
                         midia['elenco'],
                         midia['status'],
-                        midia['notas']
+                        midia.get('notas', [])
                         )
                     catalogo.append(filme)
                 elif midia['tipo'] == "SÉRIE":

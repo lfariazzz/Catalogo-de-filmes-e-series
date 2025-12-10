@@ -14,7 +14,9 @@ def exibir_menu():
     print("1. Exibir lista com as mídias disponíveis no catálogo")
     print("2. Adicionar mídia ao catálogo")
     print("3. Avaliar mídia")
-    print("4. Relatório de mídias")
+    print("4. Atualizar mídia")
+    print("5. Excluir mídia")
+    print("6. Relatório de mídias")
     print("-" * 30, "📺Comandos de Série📺", "-" * 30)
     print("5. Adicionar episódio de uma temporada de uma série")
     print("6. Alterar status de visualização")
@@ -50,6 +52,8 @@ def rodar_sistema():
             adicionar_midia(catalogo)
         elif decisao == 3:
             avaliar_midia(catalogo)
+        elif decisao == 4:
+            atualizar_midia(catalogo)
         
         else:
             print("Digite uma opção válida")
@@ -186,6 +190,63 @@ def avaliar_midia(catalogo):
                     print("Essa temporada não é válida nessa série.")
                     
             break
+    if not selecao_encontrada:
+        print("❌ ID não encontrado no catálogo.")
+
+def atualizar_midia(catalogo):
+    for midia in catalogo:
+        print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    selecao_encontrada = False
+    selecao_midia = int(input("Digite o ID da mídia que você quer atualizar: "))
+    for midia in catalogo:
+        if midia.id == selecao_midia:
+            selecao_encontrada = True
+            decisao_midia = int(input(f"""\n🖊️ Editando: {midia.titulo}
+1. Título
+2. Ano
+3. Gênero
+4. Classificação Indicativa
+5. Status (Assistido/Não Assistido)
+0. Cancelar
+Digite a opção desejada: """))
+            
+            if decisao_midia == 1:
+                novo_titulo = str(input(f"Digite o novo título que quer atribuir a {midia.titulo}: "))
+                midia.titulo = novo_titulo
+                print("✅ Alteração realizada com sucesso!")
+            elif decisao_midia == 2:
+                novo_ano = int(input(f"Digite o novo ano que quer atribuir a {midia.titulo}: "))
+                midia.ano = novo_ano
+                print("✅ Alteração realizada com sucesso!")
+            elif decisao_midia == 3:
+                novo_genero = str(input(f"Digite o novo gênero que quer atribuir a {midia.titulo}: "))
+                midia.genero = novo_genero
+                print("✅ Alteração realizada com sucesso!")
+            elif decisao_midia == 4:
+                novo_classificacao = input(f"Digite a nova classificação indicativa que quer atribuir a {midia.titulo}: ")
+                midia.classificacao_indicativa = novo_classificacao
+                print("✅ Alteração realizada com sucesso!")
+            elif decisao_midia == 5:
+                print(f"Status atual: {midia.status}")
+                print("1. NÃO ASSISTIDO")
+                print("2. ASSISTINDO")
+                print("3. ASSISTIDO")
+                op_status = input("Escolha o novo status: ")
+                    
+                if op_status == "1": midia.status = "NÃO ASSISTIDO"
+                elif op_status == "2": midia.status = "ASSISTINDO"
+                elif op_status == "3": midia.status = "ASSISTIDO"
+                else: print("❌ Opção inválida, mantendo anterior.")
+
+            elif decisao_midia == 0:
+                print("Edição cancelada, voltando ao menu principal...")
+                return
+            else:
+                print("Essa não é uma opção disponível, voltando ao menu principal...")
+                return
+            dados.salvar_midias(catalogo)
+            print("💾 Dados salvos no arquivo JSON.")
+
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")
 

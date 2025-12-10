@@ -4,9 +4,9 @@
         "titulo": "Matrix",
         "tipo": "FILME",
         "genero": "Ficção Científica",
-        "ano": 1999,
+        "ano": 1998,
         "duracao_minutos": 130,
-        "classificacao_indicativa": "14",
+        "classificacao_indicativa": "L",
         "elenco": [
             "Keanu Reeves"
         ],
