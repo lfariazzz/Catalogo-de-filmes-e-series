@@ -29,7 +29,7 @@
         ],
         "status": "ASSISTINDO",
         "notas": [],
-        "media": 0,
+        "media": 8.333333333333334,
         "temporadas": [
             {
                 "numero_temporada": 1,
@@ -41,7 +41,11 @@
                         "duracao_minutos": 50,
                         "data_lancamento": "2008-01-20",
                         "status": "ASSISTIDO",
-                        "nota": 9.5
+                        "notas": [
+                            10.0,
+                            10.0,
+                            5.0
+                        ]
                     }
                 ]
             }
@@ -60,7 +64,7 @@
         ],
         "status": "NÃO ASSISTIDO",
         "notas": [],
-        "media": 0,
+        "media": 0.0,
         "temporadas": []
     }
 ]

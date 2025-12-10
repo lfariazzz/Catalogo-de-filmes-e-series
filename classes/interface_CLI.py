@@ -2,6 +2,7 @@ from classes.midia import Midia
 from datetime import date
 from classes.serie import Serie
 from classes.filme import Filme
+from classes.episodio import Episodio
 import dados
 import json
 
@@ -165,7 +166,25 @@ def avaliar_midia(catalogo):
                 midia.avaliar_filme(nota)
                 dados.salvar_midias(catalogo)
             elif midia.tipo == "SÉRIE":
-                print("Avaliação de séries não foram implementadas ainda.")
+                escolha_temporada = int(input(f"Qual temporada de {midia.titulo} você quer avaliar um episódio: "))
+                temporada_encontrada = False
+                for temporada in midia.temporadas:
+                    if escolha_temporada == temporada.numero_temporada:
+                        temporada_encontrada = True
+                        escolha_episodio = int(input(f"Qual episódio da {escolha_temporada}a de {midia.titulo} você quer avaliar: "))
+                        episodio_encontrado = False
+                        for episodio in temporada.episodios:
+                            if escolha_episodio == episodio.numero_episodio:
+                                episodio_encontrado = True
+                                nota = float(input("Qual a nota que deseja dar: "))
+                                episodio.avaliar_episodio(nota)
+                                dados.salvar_midias(catalogo)
+                        if not episodio_encontrado:
+                            print("Esse episódio não é válida nessa série.")
+                                
+                if not temporada_encontrada:
+                    print("Essa temporada não é válida nessa série.")
+                    
             break
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")

@@ -40,12 +40,13 @@ class Serie(Midia):
             raise TypeError("Informe suma lista de temporadas.")
         
     @property 
-    def media_serie(self):
+    def media(self):
         notas_brutas = []
+
         for temporada in self.temporadas:
             for episodio in temporada.episodios:
-                if episodio.nota is not None:
-                    notas_brutas.append(episodio.nota)
+                if episodio.media > 0:
+                    notas_brutas.append(episodio.media)
         if notas_brutas:
             return(sum(notas_brutas)/len(notas_brutas))
         else:

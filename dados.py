@@ -53,7 +53,7 @@ def carregar_midias():
                                 episodio['duracao_minutos'],
                                 data_obj,
                                 episodio['status'],
-                                episodio['nota']
+                                episodio['notas']
                             )
                             obj_episodios.append(episodio)
                         temporada = Temporada(

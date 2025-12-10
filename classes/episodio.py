@@ -2,7 +2,7 @@ from datetime import date
 
 class Episodio:
     """Classe que controla os atributos de episódios das mídias de séries"""
-    def __init__(self, numero_episodio, titulo, duracao_minutos, data_lancamento, status, nota=None):
+    def __init__(self, numero_episodio, titulo, duracao_minutos, data_lancamento, status, notas):
         """Método responsável por inicializar a classe"""
         self._numero_episodio = None
         self.numero_episodio = numero_episodio
@@ -13,8 +13,8 @@ class Episodio:
         self.data_lancamento = data_lancamento
         self._status = None
         self.status = status
-        self._nota = None
-        self.nota = nota
+        self._notas = None
+        self.notas = notas if notas is not None else []
 
     @property
     def numero_episodio(self):
@@ -78,21 +78,28 @@ class Episodio:
             self._status = valor.upper()
 
     @property
-    def nota(self):
-        return self._nota
+    def notas(self):
+        return self._notas
     
-    @nota.setter
-    def nota(self, valor):
+    @notas.setter
+    def notas(self, valor):
         if valor is not None:
-            if isinstance(valor, (int,float)):
-                if valor > 10 or valor < 0:
-                    raise ValueError("A nota deve estar entre 0 e 10")
-                else:
-                    self._nota = valor
+            if isinstance(valor, list):
+                for notas in valor:
+                    if notas > 10 or notas < 0:
+                        raise ValueError("A notas deve estar entre 0 e 10")
+                    else:
+                        self._notas = valor
             else:
-                raise TypeError("A nota deve ser um número")
+                raise TypeError("A nota deve ser uma lista")
         else:
-            self._nota = valor
+            self._notas = valor
+
+    @property
+    def media(self):
+        if not self.notas:
+            return 0.0
+        return sum(self.notas) / len(self.notas)
 
     def gerar_dicionario(self):
         return{
@@ -101,7 +108,7 @@ class Episodio:
             "duracao_minutos": self.duracao_minutos,
             "data_lancamento": self.data_lancamento.isoformat(),
             "status": self.status,
-            "nota": self.nota
+            "notas": self.notas
         }
     
     def avaliar_episodio(self, nota):
@@ -109,6 +116,6 @@ class Episodio:
             if nota > 10 or nota < 0:
                 raise ValueError("A nota deve estar entre 0 e 10")
             else:
-                self._nota.append(nota)
+                self.notas.append(nota)
         else:
             raise TypeError("A nota deve ser um número.")
