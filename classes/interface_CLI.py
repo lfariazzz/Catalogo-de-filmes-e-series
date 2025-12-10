@@ -3,6 +3,7 @@ from datetime import date
 from classes.serie import Serie
 from classes.filme import Filme
 from classes.episodio import Episodio
+from classes.temporada import Temporada
 import dados
 import json
 
@@ -10,20 +11,26 @@ def exibir_menu():
     print("-" * 43, "🔥🎬ForgeFlix🎬🔥", "-" * 43)
     print("Seja bem vindo ao ForgeFlix, seu catálogo de filmes e séries desenvolvido por Levi Farias.")
     print("Estes são os comando implementados para controle por CLI:")
-    print("-" * 30, "🎞️Comando de mídia🎞️", "-" * 30)
+    print("-" * 30, "🎞️Gestão de mídia🎞️", "-" * 30)
     print("1. Exibir lista com as mídias disponíveis no catálogo")
     print("2. Adicionar mídia ao catálogo")
     print("3. Avaliar mídia")
     print("4. Atualizar mídia")
     print("5. Excluir mídia")
     print("6. Relatório de mídias")
-    print("-" * 30, "📺Comandos de Série📺", "-" * 30)
-    print("5. Adicionar episódio de uma temporada de uma série")
-    print("6. Alterar status de visualização")
+    print("-" * 30, "📺Gestão de Série📺", "-" * 30)
+    print("7. Exibir menu de séries")
     print("-" * 30, "👤Comandos de Usuário👤", "-" * 30)
-    print("7. Criar Lista personalizada de um Usuário")
-    print("8. Adicionar mídia à lista")
+    print("11. Criar Lista personalizada de um Usuário")
+    print("12. Adicionar mídia à lista")
     print("0. Encerrar programa")
+
+def exibir_menu_serie():
+    print("------------COMANDOS EXTRAS DE SÉRIES------------")
+    print("8. Adicionar temporada de uma série")
+    print("9. Adicionar episódio de uma temporada de uma série")
+    print("10. Alterar status de visualização")
+
 
 def rodar_sistema():
     print("🔄 Carregando dados...")
@@ -56,7 +63,10 @@ def rodar_sistema():
             atualizar_midia(catalogo)
         elif decisao == 5:
             excluir_midia(catalogo)
-        
+        elif decisao == 7:
+            exibir_menu_serie()
+        elif decisao == 8:
+            adicionar_temporada(catalogo)
         else:
             print("Digite uma opção válida")
 
@@ -213,7 +223,7 @@ def atualizar_midia(catalogo):
 2. Ano
 3. Gênero
 4. Classificação Indicativa
-5. Status (Assistido/Não Assistido)
+5. Status (Assistido/Não Assistido) de um filme
 0. Cancelar
 Digite a opção desejada: """))
             
@@ -234,16 +244,19 @@ Digite a opção desejada: """))
                 midia.classificacao_indicativa = novo_classificacao
                 print("✅ Alteração realizada com sucesso!")
             elif decisao_midia == 5:
-                print(f"Status atual: {midia.status}")
-                print("1. NÃO ASSISTIDO")
-                print("2. ASSISTINDO")
-                print("3. ASSISTIDO")
-                op_status = input("Escolha o novo status: ")
-                    
-                if op_status == "1": midia.status = "NÃO ASSISTIDO"
-                elif op_status == "2": midia.status = "ASSISTINDO"
-                elif op_status == "3": midia.status = "ASSISTIDO"
-                else: print("❌ Opção inválida, mantendo anterior.")
+                if midia.tipo == "FILME":
+                    print(f"Status atual: {midia.status}")
+                    print("1. NÃO ASSISTIDO")
+                    print("2. ASSISTINDO")
+                    print("3. ASSISTIDO")
+                    op_status = input("Escolha o novo status: ")
+                        
+                    if op_status == "1": midia.status = "NÃO ASSISTIDO"
+                    elif op_status == "2": midia.status = "ASSISTINDO"
+                    elif op_status == "3": midia.status = "ASSISTIDO"
+                    else: print("❌ Opção inválida, mantendo anterior.")
+                else:
+                    print("Avaliações de séries devem ser feitas usando comandos de séries. Retornando...")
 
             elif decisao_midia == 0:
                 print("Edição cancelada, voltando ao menu principal...")
@@ -275,8 +288,40 @@ def excluir_midia(catalogo):
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")
 
+def adicionar_temporada(catalogo):
+    print("----------Modo de adição de temporada----------")
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE":
+            print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo} ")
+    serie_encontrada = False
+    escolha_serie = int(input("Digite o ID da série que deseja adicionar: "))
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE" and escolha_serie == midia.id:
+            serie_encontrada = True
+            numero_temporada_nova = int(input("Qual temporada deseja adicionar? "))
+            ja_existe = False
+            for temporada in midia.temporadas:
+                if numero_temporada_nova == temporada.numero_temporada:
+                    ja_existe = True
+                    break
+            if ja_existe:
+                print("❌ Essa temporada já existe.")
+            else:
+                nova_temp = Temporada(numero_temporada_nova, "NÃO ASSISTIDO", [])
+                midia.temporadas.append(nova_temp)
+                dados.salvar_midias(catalogo)
+                print(f"✅ Temporada {numero_temporada_nova} adicionada com sucesso!")
+            break
+
+
+    if not serie_encontrada:
+        print("❌ ID da série não encontrado no catálogo.")
+
+            
+
+#6
 def relatorio_midia():
     pass
-
+#0
 def encerrar_programa():
     pass

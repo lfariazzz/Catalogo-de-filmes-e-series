@@ -65,6 +65,12 @@
         "status": "NÃO ASSISTIDO",
         "notas": [],
         "media": 0.0,
-        "temporadas": []
+        "temporadas": [
+            {
+                "numero_temporada": 2,
+                "status": "NÃO ASSISTIDO",
+                "episodios": []
+            }
+        ]
     }
 ]
