@@ -2,7 +2,7 @@ from datetime import date
 
 class Episodio:
     """Classe que controla os atributos de episódios das mídias de séries"""
-    def __init__(self, numero_episodio, titulo, duracao_minutos, data_lancamento, status, notas):
+    def __init__(self, numero_episodio, titulo, duracao_minutos, data_lancamento, status, notas = None):
         """Método responsável por inicializar a classe"""
         self._numero_episodio = None
         self.numero_episodio = numero_episodio

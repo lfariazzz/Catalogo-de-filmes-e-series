@@ -57,7 +57,7 @@
         "tipo": "SÉRIE",
         "genero": "Terror",
         "ano": 2016,
-        "duracao_minutos": 0,
+        "duracao_minutos": 82,
         "classificacao_indicativa": "14",
         "elenco": [
             "Bobby Millie Brown"
@@ -67,7 +67,26 @@
         "media": 0.0,
         "temporadas": [
             {
+                "numero_temporada": 1,
+                "status": "NÃO ASSISTIDO",
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "Piloto",
+                        "duracao_minutos": 82,
+                        "data_lancamento": "2025-12-10T20:03:15.987116",
+                        "status": "NÃO ASSISTIDO",
+                        "notas": null
+                    }
+                ]
+            },
+            {
                 "numero_temporada": 2,
+                "status": "NÃO ASSISTIDO",
+                "episodios": []
+            },
+            {
+                "numero_temporada": 3,
                 "status": "NÃO ASSISTIDO",
                 "episodios": []
             }

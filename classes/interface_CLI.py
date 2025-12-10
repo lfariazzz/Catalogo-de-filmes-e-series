@@ -4,6 +4,7 @@ from classes.serie import Serie
 from classes.filme import Filme
 from classes.episodio import Episodio
 from classes.temporada import Temporada
+from datetime import datetime
 import dados
 import json
 
@@ -67,6 +68,8 @@ def rodar_sistema():
             exibir_menu_serie()
         elif decisao == 8:
             adicionar_temporada(catalogo)
+        elif decisao == 9:
+            adicionar_episodio(catalogo)
         else:
             print("Digite uma opção válida")
 
@@ -294,7 +297,7 @@ def adicionar_temporada(catalogo):
         if midia.tipo == "SÉRIE":
             print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo} ")
     serie_encontrada = False
-    escolha_serie = int(input("Digite o ID da série que deseja adicionar: "))
+    escolha_serie = int(input("Digite o ID da série que deseja adicionar a temporada: "))
     for midia in catalogo:
         if midia.tipo == "SÉRIE" and escolha_serie == midia.id:
             serie_encontrada = True
@@ -317,6 +320,35 @@ def adicionar_temporada(catalogo):
     if not serie_encontrada:
         print("❌ ID da série não encontrado no catálogo.")
 
+def adicionar_episodio(catalogo):
+    print("----------Modo de adição de episódio----------")
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE":
+            print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    serie_encontrada = False
+    escolha_serie = int(input("Digite o ID da série que deseja adicionar o episódio: "))
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE" and escolha_serie == midia.id:
+            serie_encontrada = True
+            print(f"Essas são as temporadas adicionadas de {midia.titulo}:")
+            for temporada in midia.temporadas:
+                print(f"Temporada {temporada.numero_temporada}")
+            temporada_encontrada = False
+            escolha_temporada = int(input("Em qual deseja adicionar um episódio? "))
+            for temporada in midia.temporadas:
+                if escolha_temporada == temporada.numero_temporada:
+                    temporada_encontrada = True
+                    print(f"Adicionando na Temporada {temporada.numero_temporada}...")
+                    num__ep = int(input("Qual episódio deseja adicionar a série? "))
+                    tit_ep = str(input("Qual é o título do episódio? "))
+                    duracao_ep = int(input("Qual é a duração do ep em minutos? "))
+                    episodio_novo = Episodio(num__ep, tit_ep, duracao_ep, datetime.now(), "NÃO ASSISTIDO")
+                    temporada.episodios.append(episodio_novo)
+                    dados.salvar_midias(catalogo)
+            if not temporada_encontrada:
+                print("❌ Você não digitou uma temporada válida.")
+    if not serie_encontrada:
+        print("❌ ID da série não encontrado no catálogo.")
             
 
 #6
