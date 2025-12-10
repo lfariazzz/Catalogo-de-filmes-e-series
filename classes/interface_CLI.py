@@ -73,6 +73,12 @@ def exibir_catalogo(catalogo):
 def adicionar_midia(catalogo):
     print("-" * 30, "Este é modo de adição de mídias e séries do ForgeFlix:", "-" * 30)
 
+    #Definição do título
+    titulo = str(input("Digite o título da mídia: "))
+
+    #Definição do ano
+    ano = int(input("Digite o ano da mídia: "))
+
     #Decisão do tipo de mídia e geração do ID
     filme_ou_serie = int(input("Deseja criar um (1) filme ou uma (2) série? "))
     decisao_midia = None
@@ -87,9 +93,11 @@ def adicionar_midia(catalogo):
     else:
         print("❌ Opção inválida.")
         return 
-
-    #Definição do título
-    titulo = str(input("Digite o título da mídia: "))
+    
+    for midia in catalogo:
+        if midia.titulo.lower() == titulo.lower() and midia.ano == ano and midia.tipo == decisao_midia:
+            print("Essa mídia já foi adicionada ao catálogo.")
+            return
 
     #Definição do gênero
     genero = str(input("""Digite o gênero da mídia:
@@ -109,8 +117,7 @@ Policial
 Musical
 DIGITE: """))
     
-    #Definição do ano
-    ano = int(input("Digite o ano da mídia: "))
+    
 
     #Definição da duração (CASO SEJA FILME)
     if decisao_midia == "FILME":

@@ -110,11 +110,10 @@ class Midia:
     def elenco(self, valores):
         if not isinstance(valores, list):
             raise TypeError("O elenco deve ser uma lista.")
-        else:
-            for valor in valores:
+        for valor in valores:
                 if not isinstance(valor, str):
-                    raise ValueError("O elenco deve conter apenas letras.")
-            self._elenco = valores
+                    raise ValueError("Os nomes do elenco devem ser texto (string).")
+        self._elenco = valores
 
     @property
     def status(self):
@@ -167,7 +166,9 @@ class Midia:
     def __eq__(self, midia2):
         """Método responsável pela comparação de mídias para conferência de duplicidade"""
         if isinstance(midia2, Midia):
-            return self.titulo == midia2.titulo and self.tipo == midia2.tipo
+            return (self.titulo.lower() == midia2.titulo.lower() and 
+                    self.tipo == midia2.tipo and 
+                    self.ano == midia2.ano)
         else:
             return False
 
