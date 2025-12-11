@@ -39,7 +39,7 @@
                         "numero_episodio": 1,
                         "titulo": "Piloto",
                         "duracao_minutos": 50,
-                        "data_lancamento": "2008-01-20",
+                        "data_lancamento": "2008-01-20T00:00:00",
                         "status": "ASSISTIDO",
                         "notas": [
                             10.0,
@@ -57,7 +57,7 @@
         "tipo": "SÉRIE",
         "genero": "Terror",
         "ano": 2016,
-        "duracao_minutos": 82,
+        "duracao_minutos": 292,
         "classificacao_indicativa": "14",
         "elenco": [
             "Bobby Millie Brown"
@@ -77,13 +77,30 @@
                         "data_lancamento": "2025-12-10T20:03:15.987116",
                         "status": "NÃO ASSISTIDO",
                         "notas": null
+                    },
+                    {
+                        "numero_episodio": 2,
+                        "titulo": "Começo",
+                        "duracao_minutos": 90,
+                        "data_lancamento": "2025-12-10T20:47:56.082791",
+                        "status": "NÃO ASSISTIDO",
+                        "notas": null
                     }
                 ]
             },
             {
                 "numero_temporada": 2,
                 "status": "NÃO ASSISTIDO",
-                "episodios": []
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "Piloto",
+                        "duracao_minutos": 120,
+                        "data_lancamento": "2025-12-10T20:48:42.922113",
+                        "status": "NÃO ASSISTIDO",
+                        "notas": null
+                    }
+                ]
             },
             {
                 "numero_temporada": 3,

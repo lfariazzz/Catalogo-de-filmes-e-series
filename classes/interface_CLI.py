@@ -30,7 +30,7 @@ def exibir_menu_serie():
     print("------------COMANDOS EXTRAS DE SÉRIES------------")
     print("8. Adicionar temporada de uma série")
     print("9. Adicionar episódio de uma temporada de uma série")
-    print("10. Alterar status de visualização")
+    print("10. Atualizar um episódio")
 
 
 def rodar_sistema():
@@ -70,6 +70,8 @@ def rodar_sistema():
             adicionar_temporada(catalogo)
         elif decisao == 9:
             adicionar_episodio(catalogo)
+        elif decisao == 10:
+            atualizar_episodio(catalogo)
         else:
             print("Digite uma opção válida")
 
@@ -350,6 +352,61 @@ def adicionar_episodio(catalogo):
     if not serie_encontrada:
         print("❌ ID da série não encontrado no catálogo.")
             
+def atualizar_episodio(catalogo):
+    print("----------Modo de edição de episódio----------")
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE":
+            print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
+    serie_encontrada = False
+    escolha_serie = int(input("Digite o ID da série que deseja editar o episódio: "))
+    for midia in catalogo:
+        if midia.tipo == "SÉRIE" and escolha_serie == midia.id:
+            serie_encontrada = True
+            for temporada in midia.temporadas:
+                print(f"Temporada {temporada.numero_temporada}")
+                for episodio in temporada.episodios:
+                    print(f" Ep {episodio.numero_episodio} - {episodio.titulo}")
+            temporada_encontrada = False
+            escolha_temporada = int(input("Em qual temporada deseja editar um episódio? "))
+            for temporada in midia.temporadas:
+                    if escolha_temporada == temporada.numero_temporada:
+                        temporada_encontrada = True
+                        escolha_episodio = int(input(f"Qual episódio da {temporada.numero_temporada}a temporada deseja atualizar? "))
+                        episodio_encontrado = False
+                        for episodio in temporada.episodios:
+                            if escolha_episodio == episodio.numero_episodio:
+                                episodio_encontrado = True
+                                print(f"\n🖊️ Editando Ep {episodio.numero_episodio}: {episodio.titulo}")
+                                print("1. Alterar Título")
+                                print("2. Alterar Duração")
+                                print("3. Alterar Status")
+                                decisao_edicao = int(input("O que deseja fazer? "))
+                                if decisao_edicao == 1:
+                                    titulo_novo = str(input("Digite o novo título"))
+                                    episodio.titulo = titulo_novo
+                                elif decisao_edicao == 2:
+                                    duracao_nova = int(input("Digite a nova duração"))
+                                    episodio.duracao_minutos = duracao_nova
+                                elif decisao_edicao == 3:
+                                    print(f"Status Atual: {episodio.status}")
+                                    print("1. NÃO ASSISTIDO | 2. ASSISTINDO | 3. ASSISTIDO")
+                                    status_novo = input("Novo Status: ")
+                                    status_anterior = episodio.status
+                                    if status_novo == "1": episodio.status = "NÃO ASSISTIDO"
+                                    elif status_novo == "2": episodio.status = "ASSISTINDO"
+                                    elif status_novo == "3": episodio.status = "ASSISTIDO"
+                                    if episodio.status != status_anterior:
+                                                midia.verificar_status_automatico()
+                                                print(f"✅ Status salvo. Série atualizada para: {midia.status}")
+                                    dados.salvar_midias(catalogo)
+                                else:
+                                    print("❌ Você não digitou uma opção válida.")
+                        if not episodio_encontrado:
+                            print("❌ Você não digitou um episódio válido.")
+            if not temporada_encontrada:
+                print("❌ Você não digitou uma temporada válida.")
+    if not serie_encontrada:
+        print("❌ ID da série não encontrado no catálogo.")
 
 #6
 def relatorio_midia():

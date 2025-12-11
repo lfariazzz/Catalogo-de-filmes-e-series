@@ -2,7 +2,7 @@ from classes.temporada import Temporada
 from classes.episodio import Episodio
 from classes.serie import Serie
 from classes.filme import Filme
-from datetime import date
+from datetime import datetime
 import json
 import os
 
@@ -46,7 +46,7 @@ def carregar_midias():
                     for temporada in midia['temporadas']:
                         obj_episodios = []
                         for episodio in temporada['episodios']:
-                            data_obj = date.fromisoformat(episodio['data_lancamento'])
+                            data_obj = datetime.fromisoformat(episodio['data_lancamento'])
                             episodio = Episodio(
                                 episodio['numero_episodio'],
                                 episodio['titulo'],
