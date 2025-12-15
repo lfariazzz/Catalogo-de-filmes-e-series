@@ -57,3 +57,29 @@ def relatorio_top_midias(catalogo):
     for i, midia in enumerate(midias_avaliadas[:10], 1):
         print(f"{i}º | {midia.media:.1f} ★ | {midia.titulo}")
     input("\nPressione Enter para continuar...")
+
+def relatorio_top_series_assistidas(catalogo):
+    print("\n" + "-"*40)
+    print("   🏃 TOP 3 SÉRIES MAIS MARATONADAS")
+    print("-" * 40)
+
+    placar = []
+
+    for midia in catalogo:
+        episodios_assistidos = 0
+        if midia.tipo == "SÉRIE":
+            for temporada in midia.temporadas:
+                for episodio in temporada.episodios:
+                    if episodio.status == "ASSISTIDO":
+                        episodios_assistidos += 1
+            if episodios_assistidos > 0:
+                placar.append((midia.titulo, episodios_assistidos))
+    if not placar:
+        print("⚠️ Nenhuma série maratonada ainda.")
+    else:
+        placar.sort(key=lambda x: x[1], reverse=True)
+        
+        for i, item in enumerate(placar[:3], 1):
+            print(f"{i}º | {item[1]} eps | {item[0]}")
+
+    input("\nPressione Enter para continuar...")        
