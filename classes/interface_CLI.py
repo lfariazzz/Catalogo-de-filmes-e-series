@@ -39,6 +39,8 @@ def rodar_sistema():
     catalogo = dados.carregar_midias()
     print(f"✅ {len(catalogo)} mídias carregadas na memória.")
 
+    historico = Historico()
+
     exibir_menu()
 
     while True:
@@ -62,9 +64,11 @@ def rodar_sistema():
         elif decisao == 3:
             avaliar_midia(catalogo)
         elif decisao == 4:
-            atualizar_midia(catalogo)
+            atualizar_midia(catalogo, historico)
         elif decisao == 5:
             excluir_midia(catalogo)
+        elif decisao == 6:
+            exibir_relatorio(catalogo, historico)
         elif decisao == 7:
             exibir_menu_serie()
         elif decisao == 8:
@@ -72,7 +76,7 @@ def rodar_sistema():
         elif decisao == 9:
             adicionar_episodio(catalogo)
         elif decisao == 10:
-            atualizar_episodio(catalogo)
+            atualizar_episodio(catalogo, historico)
         else:
             print("Digite uma opção válida")
 
@@ -220,7 +224,7 @@ def avaliar_midia(catalogo):
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")
 
-def atualizar_midia(catalogo):
+def atualizar_midia(catalogo, historico):
     for midia in catalogo:
         print(f"ID: {midia.id:<5} | {midia.tipo:<7} | {midia.ano} | {midia.titulo}")
     selecao_encontrada = False
@@ -255,15 +259,16 @@ Digite a opção desejada: """))
                 print("✅ Alteração realizada com sucesso!")
             elif decisao_midia == 5:
                 if midia.tipo == "FILME":
+
                     print(f"Status atual: {midia.status}")
                     print("1. NÃO ASSISTIDO")
                     print("2. ASSISTINDO")
                     print("3. ASSISTIDO")
-                    op_status = input("Escolha o novo status: ")
-                        
+                    op_status = input("Escolha o novo status: ")  
                     if op_status == "1": midia.status = "NÃO ASSISTIDO"
                     elif op_status == "2": midia.status = "ASSISTINDO"
-                    elif op_status == "3": midia.status = "ASSISTIDO"
+                    elif op_status == "3": 
+                        historico.registrar_conclusao(midia, 0.0)
                     else: print("❌ Opção inválida, mantendo anterior.")
                 else:
                     print("Avaliações de séries devem ser feitas usando comandos de séries. Retornando...")
@@ -297,6 +302,47 @@ def excluir_midia(catalogo):
                 break
     if not selecao_encontrada:
         print("❌ ID não encontrado no catálogo.")
+
+def exibir_relatorio(catalogo, historico):
+    print("\n" + "="*40)
+    print("      📊 RELATÓRIOS DO CATÁLOGO      ")
+    print("="*40)
+
+    media_geral = historico.media_catalogo(catalogo)
+    
+    if media_geral > 0:
+        print(f"⭐ Média de Qualidade do Catálogo: {media_geral:.2f} / 10.0")
+    else:
+        print("⭐ Média de Qualidade: N/A (Nenhuma avaliação ainda)")
+
+    print("-" * 40)
+    print("\n⏱️  CÁLCULO DE TEMPO DE TELA")
+    print("Descubra quanto tempo você gastou assistindo num período.")
+    
+    try:
+        print("\nDigite as datas no formato dia/mês/ano (Ex: 15/12/2024)")
+        inicio_str = input("Data Inicial: ")
+        fim_str = input("Data Final:   ")
+
+
+        data_inicio = datetime.strptime(inicio_str, "%d/%m/%Y")
+        data_fim = datetime.strptime(fim_str, "%d/%m/%Y").replace(hour=23, minute=59, second=59)
+        
+
+        total_minutos = historico.calcular_tempo_assistido(data_inicio, data_fim)
+
+        horas = int(total_minutos // 60)
+        minutos = int(total_minutos % 60)
+
+        print(f"\n✅ Resultados entre {inicio_str} e {fim_str}:")
+        print(f"   Total de minutos: {total_minutos} min")
+        print(f"   Tempo formatado:  {horas} horas e {minutos} minutos")
+
+    except ValueError:
+        print("\n❌ Erro: Data inválida. Certifique-se de usar o formato DD/MM/AAAA.")
+    
+    print("="*40)
+    input("\nPressione Enter para voltar ao menu...")
 
 def adicionar_temporada(catalogo):
     print("----------Modo de adição de temporada----------")
@@ -357,7 +403,7 @@ def adicionar_episodio(catalogo):
     if not serie_encontrada:
         print("❌ ID da série não encontrado no catálogo.")
             
-def atualizar_episodio(catalogo):
+def atualizar_episodio(catalogo, historico):
     print("----------Modo de edição de episódio----------")
     for midia in catalogo:
         if midia.tipo == "SÉRIE":
@@ -399,7 +445,8 @@ def atualizar_episodio(catalogo):
                                     status_anterior = episodio.status
                                     if status_novo == "1": episodio.status = "NÃO ASSISTIDO"
                                     elif status_novo == "2": episodio.status = "ASSISTINDO"
-                                    elif status_novo == "3": episodio.status = "ASSISTIDO"
+                                    elif status_novo == "3":
+                                        historico.registrar_conclusao(episodio, 0.0)
                                     if episodio.status != status_anterior:
                                                 midia.verificar_status_automatico()
                                                 print(f"✅ Status salvo. Série atualizada para: {midia.status}")
@@ -413,9 +460,6 @@ def atualizar_episodio(catalogo):
     if not serie_encontrada:
         print("❌ ID da série não encontrado no catálogo.")
 
-#6
-def relatorio_midia():
-    pass
 #0
 def encerrar_programa():
     pass

@@ -62,7 +62,7 @@
         "elenco": [
             "Bobby Millie Brown"
         ],
-        "status": "NÃO ASSISTIDO",
+        "status": "ASSISTINDO",
         "notas": [],
         "media": 0.0,
         "temporadas": [
@@ -75,7 +75,7 @@
                         "titulo": "Piloto",
                         "duracao_minutos": 82,
                         "data_lancamento": "2025-12-10T20:03:15.987116",
-                        "status": "NÃO ASSISTIDO",
+                        "status": "ASSISTIDO",
                         "notas": null
                     },
                     {
@@ -83,7 +83,7 @@
                         "titulo": "Começo",
                         "duracao_minutos": 90,
                         "data_lancamento": "2025-12-10T20:47:56.082791",
-                        "status": "NÃO ASSISTIDO",
+                        "status": "ASSISTIDO",
                         "notas": null
                     }
                 ]
@@ -108,5 +108,22 @@
                 "episodios": []
             }
         ]
+    },
+    {
+        "id": 102,
+        "titulo": "The Purge",
+        "tipo": "FILME",
+        "genero": "Suspense",
+        "ano": 2013,
+        "duracao_minutos": 86,
+        "classificacao_indicativa": "16",
+        "elenco": [
+            "Ethan Hawke",
+            "Lena Headey",
+            "James DeMonaco"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [],
+        "media": 0
     }
 ]

@@ -1,7 +1,7 @@
 from classes.registro_visualizacao import RegistroVisualizacao
 from classes.filme import Filme
 from classes.serie import Serie
-from datetime import date
+from datetime import datetime
 from classes.midia import Midia
 
 class Historico:
@@ -16,8 +16,10 @@ class Historico:
             self.id_historico = id_historico
         self.registros = registros if registros is not None else []
         
-    def registrar_conclusao(self, midia, data_visualizacao, nota_atribuida):
-        novo_registro = RegistroVisualizacao(midia, data_visualizacao, "ASSISTIDO", nota_atribuida)
+    def registrar_conclusao(self, midia, nota_atribuida, data_visualizacao = None):
+        if data_visualizacao is None:
+            data_visualizacao = datetime.now()
+        novo_registro = RegistroVisualizacao(midia, "ASSISTIDO", nota_atribuida, data_visualizacao)
         self.registros.append(novo_registro)
         midia.status = "ASSISTIDO"
     
