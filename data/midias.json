@@ -4,17 +4,129 @@
         "titulo": "Matrix",
         "tipo": "FILME",
         "genero": "Ficção Científica",
-        "ano": 1998,
-        "duracao_minutos": 130,
-        "classificacao_indicativa": "L",
+        "ano": 1999,
+        "duracao_minutos": 136,
+        "classificacao_indicativa": "14",
         "elenco": [
-            "Keanu Reeves"
+            "Keanu Reeves",
+            "Laurence Fishburne",
+            "Carrie-Anne Moss"
         ],
         "status": "ASSISTIDO",
         "notas": [
+            10.0,
+            9.5,
+            10.0
+        ],
+        "media": 9.833333333333334
+    },
+    {
+        "id": 102,
+        "titulo": "O Poderoso Chefão",
+        "tipo": "FILME",
+        "genero": "Drama",
+        "ano": 1972,
+        "duracao_minutos": 175,
+        "classificacao_indicativa": "16",
+        "elenco": [
+            "Marlon Brando",
+            "Al Pacino"
+        ],
+        "status": "NÃO ASSISTIDO",
+        "notas": [],
+        "media": 0
+    },
+    {
+        "id": 103,
+        "titulo": "Superbad: É Hoje",
+        "tipo": "FILME",
+        "genero": "Comédia",
+        "ano": 2007,
+        "duracao_minutos": 113,
+        "classificacao_indicativa": "16",
+        "elenco": [
+            "Jonah Hill",
+            "Michael Cera"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            8.0,
+            7.5,
+            8.0
+        ],
+        "media": 7.833333333333333
+    },
+    {
+        "id": 104,
+        "titulo": "A Viagem de Chihiro",
+        "tipo": "FILME",
+        "genero": "Animação",
+        "ano": 2001,
+        "duracao_minutos": 125,
+        "classificacao_indicativa": "L",
+        "elenco": [
+            "Rumi Hiiragi"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            10.0,
             10.0
         ],
         "media": 10.0
+    },
+    {
+        "id": 105,
+        "titulo": "Vingadores: Ultimato",
+        "tipo": "FILME",
+        "genero": "Ação",
+        "ano": 2019,
+        "duracao_minutos": 181,
+        "classificacao_indicativa": "12",
+        "elenco": [
+            "Robert Downey Jr.",
+            "Chris Evans"
+        ],
+        "status": "ASSISTINDO",
+        "notas": [],
+        "media": 0
+    },
+    {
+        "id": 106,
+        "titulo": "Parasita",
+        "tipo": "FILME",
+        "genero": "Suspense",
+        "ano": 2019,
+        "duracao_minutos": 132,
+        "classificacao_indicativa": "16",
+        "elenco": [
+            "Song Kang-ho"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            9.0,
+            9.5,
+            10.0
+        ],
+        "media": 9.5
+    },
+    {
+        "id": 107,
+        "titulo": "Interestelar",
+        "tipo": "FILME",
+        "genero": "Ficção Científica",
+        "ano": 2014,
+        "duracao_minutos": 169,
+        "classificacao_indicativa": "10",
+        "elenco": [
+            "Matthew McConaughey",
+            "Anne Hathaway"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            10.0,
+            8.5
+        ],
+        "media": 9.25
     },
     {
         "id": 201,
@@ -22,14 +134,19 @@
         "tipo": "SÉRIE",
         "genero": "Drama",
         "ano": 2008,
-        "duracao_minutos": 50,
+        "duracao_minutos": 154,
         "classificacao_indicativa": "18",
         "elenco": [
-            "Bryan Cranston"
+            "Bryan Cranston",
+            "Aaron Paul"
         ],
-        "status": "ASSISTINDO",
-        "notas": [],
-        "media": 8.333333333333334,
+        "status": "ASSISTIDO",
+        "notas": [
+            10.0,
+            9.8,
+            10.0
+        ],
+        "media": 9.5,
         "temporadas": [
             {
                 "numero_temporada": 1,
@@ -37,14 +154,32 @@
                 "episodios": [
                     {
                         "numero_episodio": 1,
-                        "titulo": "Piloto",
-                        "duracao_minutos": 50,
+                        "titulo": "Pilot",
+                        "duracao_minutos": 58,
                         "data_lancamento": "2008-01-20T00:00:00",
                         "status": "ASSISTIDO",
                         "notas": [
-                            10.0,
-                            10.0,
-                            5.0
+                            10.0
+                        ]
+                    },
+                    {
+                        "numero_episodio": 2,
+                        "titulo": "Cat's in the Bag...",
+                        "duracao_minutos": 48,
+                        "data_lancamento": "2008-01-27T00:00:00",
+                        "status": "ASSISTIDO",
+                        "notas": [
+                            9.0
+                        ]
+                    },
+                    {
+                        "numero_episodio": 3,
+                        "titulo": "And the Bag's in the River",
+                        "duracao_minutos": 48,
+                        "data_lancamento": "2008-02-10T00:00:00",
+                        "status": "ASSISTIDO",
+                        "notas": [
+                            9.5
                         ]
                     }
                 ]
@@ -55,36 +190,44 @@
         "id": 202,
         "titulo": "Stranger Things",
         "tipo": "SÉRIE",
-        "genero": "Terror",
+        "genero": "Ficção Científica",
         "ano": 2016,
-        "duracao_minutos": 292,
+        "duracao_minutos": 150,
         "classificacao_indicativa": "14",
         "elenco": [
-            "Bobby Millie Brown"
+            "Millie Bobby Brown",
+            "Finn Wolfhard"
         ],
         "status": "ASSISTINDO",
-        "notas": [],
-        "media": 0.0,
+        "notas": [
+            8.0,
+            7.0
+        ],
+        "media": 7.75,
         "temporadas": [
             {
                 "numero_temporada": 1,
-                "status": "NÃO ASSISTIDO",
+                "status": "ASSISTIDO",
                 "episodios": [
                     {
                         "numero_episodio": 1,
-                        "titulo": "Piloto",
-                        "duracao_minutos": 82,
-                        "data_lancamento": "2025-12-10T20:03:15.987116",
+                        "titulo": "Chapter One: The Vanishing",
+                        "duracao_minutos": 47,
+                        "data_lancamento": "2016-07-15T00:00:00",
                         "status": "ASSISTIDO",
-                        "notas": null
+                        "notas": [
+                            8.0
+                        ]
                     },
                     {
                         "numero_episodio": 2,
-                        "titulo": "Começo",
-                        "duracao_minutos": 90,
-                        "data_lancamento": "2025-12-10T20:47:56.082791",
+                        "titulo": "Chapter Two: The Weirdo",
+                        "duracao_minutos": 55,
+                        "data_lancamento": "2016-07-15T00:00:00",
                         "status": "ASSISTIDO",
-                        "notas": null
+                        "notas": [
+                            7.5
+                        ]
                     }
                 ]
             },
@@ -94,35 +237,151 @@
                 "episodios": [
                     {
                         "numero_episodio": 1,
-                        "titulo": "Piloto",
-                        "duracao_minutos": 120,
-                        "data_lancamento": "2025-12-10T20:48:42.922113",
+                        "titulo": "Chapter One: MADMAX",
+                        "duracao_minutos": 48,
+                        "data_lancamento": "2017-10-27T00:00:00",
                         "status": "NÃO ASSISTIDO",
-                        "notas": null
+                        "notas": []
                     }
                 ]
-            },
-            {
-                "numero_temporada": 3,
-                "status": "NÃO ASSISTIDO",
-                "episodios": []
             }
         ]
     },
     {
-        "id": 102,
+        "id": 203,
+        "titulo": "The Office",
+        "tipo": "SÉRIE",
+        "genero": "Comédia",
+        "ano": 2005,
+        "duracao_minutos": 45,
+        "classificacao_indicativa": "12",
+        "elenco": [
+            "Steve Carell",
+            "Rainn Wilson"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            9.0,
+            10.0,
+            9.5
+        ],
+        "media": 9.0,
+        "temporadas": [
+            {
+                "numero_temporada": 1,
+                "status": "ASSISTIDO",
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "Pilot",
+                        "duracao_minutos": 23,
+                        "data_lancamento": "2005-03-24T00:00:00",
+                        "status": "ASSISTIDO",
+                        "notas": [
+                            8.0
+                        ]
+                    },
+                    {
+                        "numero_episodio": 2,
+                        "titulo": "Diversity Day",
+                        "duracao_minutos": 22,
+                        "data_lancamento": "2005-03-29T00:00:00",
+                        "status": "ASSISTIDO",
+                        "notas": [
+                            10.0
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 204,
+        "titulo": "Game of Thrones",
+        "tipo": "SÉRIE",
+        "genero": "Fantasia",
+        "ano": 2011,
+        "duracao_minutos": 129,
+        "classificacao_indicativa": "18",
+        "elenco": [
+            "Emilia Clarke",
+            "Kit Harington"
+        ],
+        "status": "ASSISTIDO",
+        "notas": [
+            9.0,
+            8.0
+        ],
+        "media": 9.0,
+        "temporadas": [
+            {
+                "numero_temporada": 1,
+                "status": "ASSISTIDO",
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "Winter Is Coming",
+                        "duracao_minutos": 62,
+                        "data_lancamento": "2011-04-17T00:00:00",
+                        "status": "ASSISTIDO",
+                        "notas": [
+                            9.0
+                        ]
+                    },
+                    {
+                        "numero_episodio": 2,
+                        "titulo": "Ep 2",
+                        "duracao_minutos": 67,
+                        "data_lancamento": "2025-12-15T13:44:37.898336",
+                        "status": "NÃO ASSISTIDO",
+                        "notas": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 205,
+        "titulo": "Chernobyl",
+        "tipo": "SÉRIE",
+        "genero": "Drama",
+        "ano": 2019,
+        "duracao_minutos": 59,
+        "classificacao_indicativa": "16",
+        "elenco": [
+            "Jared Harris",
+            "Stellan Skarsgård"
+        ],
+        "status": "NÃO ASSISTIDO",
+        "notas": [],
+        "media": 0.0,
+        "temporadas": [
+            {
+                "numero_temporada": 1,
+                "status": "NÃO ASSISTIDO",
+                "episodios": [
+                    {
+                        "numero_episodio": 1,
+                        "titulo": "1:23:45",
+                        "duracao_minutos": 59,
+                        "data_lancamento": "2019-05-06T00:00:00",
+                        "status": "NÃO ASSISTIDO",
+                        "notas": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 108,
         "titulo": "The Purge",
         "tipo": "FILME",
         "genero": "Suspense",
         "ano": 2013,
-        "duracao_minutos": 86,
+        "duracao_minutos": 80,
         "classificacao_indicativa": "16",
-        "elenco": [
-            "Ethan Hawke",
-            "Lena Headey",
-            "James DeMonaco"
-        ],
-        "status": "ASSISTIDO",
+        "elenco": [],
+        "status": "NÃO ASSISTIDO",
         "notas": [],
         "media": 0
     }

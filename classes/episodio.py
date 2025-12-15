@@ -88,8 +88,7 @@ class Episodio:
                 for notas in valor:
                     if notas > 10 or notas < 0:
                         raise ValueError("A notas deve estar entre 0 e 10")
-                    else:
-                        self._notas = valor
+                self._notas = valor
             else:
                 raise TypeError("A nota deve ser uma lista")
         else:
