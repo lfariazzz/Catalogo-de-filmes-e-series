@@ -3,12 +3,13 @@ from datetime import date
 
 class Usuario:
     """Classe responsável pelo controle de configurações e dados individuais do usuário"""
-    def __init__(self, id, nome, email, listas = None, historico = None):
+    def __init__(self, id, nome, email, config_sistema, listas = None, historico = None):
         """Método responsável pela inicialização da classe"""
         self.id = id
         self._nome = None
         self.nome = nome
         self.email = email
+        self.config = config_sistema
         self.listas = listas if listas is not None else []
         self.historico = historico if historico is not None else None
 

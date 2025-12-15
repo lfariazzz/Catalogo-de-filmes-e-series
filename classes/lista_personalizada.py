@@ -23,3 +23,15 @@ class ListaPersonalizada:
     def editar_lista(self):
         """Método responsável por alterar dados dos parâmetros da classe"""
         pass
+
+    def criar_dicionario(self):
+        lista_titulos = []
+        for midia in self.midias:
+             lista_titulos.append(midia.titulo)
+        return{
+             "id": self.id_lista,
+             "nome": self.nome,
+             "descricao": self.descricao,
+             "data_criacao": self.data_criacao.isoformat(),
+             "midias": lista_titulos
+        }

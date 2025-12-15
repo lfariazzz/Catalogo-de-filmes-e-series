@@ -1,5 +1,6 @@
 {
-    "nota_recomendação": 7.0, 
+    "nota_recomendacao": 7.0, 
     "limite_listas": 10,
-    "conversao_horas": 60
+    "conversao_horas": 60,
+    "casas_arredondadas_configuraveis": 2
 }
