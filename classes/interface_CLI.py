@@ -5,6 +5,7 @@ from classes.filme import Filme
 from classes.episodio import Episodio
 from classes.temporada import Temporada
 from datetime import datetime
+from classes.historico import Historico
 import dados
 import json
 
@@ -82,8 +83,12 @@ def exibir_catalogo(catalogo):
     if not catalogo:
         print("🚫NENHUMA MÍDIA CADASTRADA🚫")
     else:
-       for midia in catalogo:
-            print(midia)
+        for midia in catalogo:
+           print(f"{midia}")
+        historico = Historico() 
+        media_geral = historico.media_catalogo(catalogo)
+        if media_geral > 0:
+            print(f"\n⭐  Média Geral do Catálogo: {media_geral:.2f} ⭐")
 
 def adicionar_midia(catalogo):
     print("-" * 30, "Este é modo de adição de mídias e séries do ForgeFlix:", "-" * 30)

@@ -161,7 +161,10 @@ class Midia:
 
     def __str__(self):
         """Método responsável por representar de forme legível a exibição do filme"""
-        return f"{self.titulo} ({self.ano}) - {self.tipo}"
+        if self.media > 0:
+            return f"{self.titulo} ({self.ano}) - {self.tipo} - ⭐ {self.media:.2f}"
+        else:
+            return f"{self.titulo} ({self.ano}) - {self.tipo} - (Sem avaliações)"
         
     def __eq__(self, midia2):
         """Método responsável pela comparação de mídias para conferência de duplicidade"""

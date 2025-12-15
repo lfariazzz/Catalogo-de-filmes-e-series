@@ -16,3 +16,10 @@ class Filme(Midia):
                 self._notas.append(nota)
         else:
             raise TypeError("A nota deve ser um número.")
+        
+    @property
+    def tempo_assistido(self):
+        tempo_assistido = 0.0
+        if self.status == "ASSISTIDO":
+            tempo_assistido = self.duracao_minutos
+        return tempo_assistido

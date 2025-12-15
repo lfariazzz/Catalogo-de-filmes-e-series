@@ -79,3 +79,12 @@ class Serie(Midia):
             self.status = "ASSISTINDO"
         elif episodios_totais == episodios_assistidos:
             self.status = "ASSISTIDO"
+    
+    @property
+    def tempo_assistido(self):
+        tempo_assistido = 0
+        for temporada in self.temporadas:
+            for episodio in temporada.episodios:
+                if episodio.status == "ASSISTIDO":
+                    tempo_assistido += episodio.duracao_minutos
+        return tempo_assistido
