@@ -320,13 +320,17 @@ def exibir_relatorio(catalogo, historico):
     print("Descubra quanto tempo você gastou assistindo num período.")
     print("\n2 - ⏱️  CÁLCULO DE TEMPO DE MÍDIA")
     print("\nDescubra qual tipo de mídia você mais assiste.")
+    print("\n3 - ⭐  TOP 10 MÍDIAS")
+    print("\nDescubra quais são as melhores mídias avaliadas do catálogo.")
 
     decisao_relatorio = int(input("Qual relatório deseja exibir? "))
     
     if decisao_relatorio == 1:
         relatorios.relatorio_tempo_assistido(historico)
-    if decisao_relatorio == 2:
+    elif decisao_relatorio == 2:
         relatorios.relatorio_tempo_tipos(historico)
+    elif decisao_relatorio == 3:
+        relatorios.relatorio_top_midias(catalogo)
         
 
 def adicionar_temporada(catalogo):

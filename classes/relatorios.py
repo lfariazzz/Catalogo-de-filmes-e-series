@@ -41,3 +41,19 @@ def relatorio_tempo_tipos(historico):
     print(f"📺 SÉRIES: {horas_serie}h {minutos_serie}min")
 
     input("\nPressione Enter para continuar...")
+
+def relatorio_top_midias(catalogo):
+    print("\n" + "-"*40)
+    print("   ⭐ TOP 10 MÍDIAS MELHOR AVALIADAS")
+    print("-" * 40)
+    midias_avaliadas = []
+    for midia in catalogo:
+        if midia.media:
+            midias_avaliadas.append(midia)
+    if not midias_avaliadas:
+        print("⚠️ Nenhuma mídia avaliada ainda.")
+    else:
+        midias_avaliadas.sort(reverse=True)
+    for i, midia in enumerate(midias_avaliadas[:10], 1):
+        print(f"{i}º | {midia.media:.1f} ★ | {midia.titulo}")
+    input("\nPressione Enter para continuar...")
