@@ -6,6 +6,7 @@ from classes.episodio import Episodio
 from classes.temporada import Temporada
 from datetime import datetime
 from classes.historico import Historico
+from classes import relatorios
 import dados
 import json
 
@@ -307,42 +308,22 @@ def exibir_relatorio(catalogo, historico):
     print("\n" + "="*40)
     print("      📊 RELATÓRIOS DO CATÁLOGO      ")
     print("="*40)
-
     media_geral = historico.media_catalogo(catalogo)
-    
     if media_geral > 0:
         print(f"⭐ Média de Qualidade do Catálogo: {media_geral:.2f} / 10.0")
     else:
         print("⭐ Média de Qualidade: N/A (Nenhuma avaliação ainda)")
 
+
     print("-" * 40)
-    print("\n⏱️  CÁLCULO DE TEMPO DE TELA")
+    print("\n1 - ⏱️  CÁLCULO DE TEMPO DE TELA")
     print("Descubra quanto tempo você gastou assistindo num período.")
+
+    decisao_relatorio = int(input("Qual relatório deseja exibir? "))
     
-    try:
-        print("\nDigite as datas no formato dia/mês/ano (Ex: 15/12/2024)")
-        inicio_str = input("Data Inicial: ")
-        fim_str = input("Data Final:   ")
-
-
-        data_inicio = datetime.strptime(inicio_str, "%d/%m/%Y")
-        data_fim = datetime.strptime(fim_str, "%d/%m/%Y").replace(hour=23, minute=59, second=59)
+    if decisao_relatorio == 1:
+        relatorios.relatorio_tempo_assistido(historico)
         
-
-        total_minutos = historico.calcular_tempo_assistido(data_inicio, data_fim)
-
-        horas = int(total_minutos // 60)
-        minutos = int(total_minutos % 60)
-
-        print(f"\n✅ Resultados entre {inicio_str} e {fim_str}:")
-        print(f"   Total de minutos: {total_minutos} min")
-        print(f"   Tempo formatado:  {horas} horas e {minutos} minutos")
-
-    except ValueError:
-        print("\n❌ Erro: Data inválida. Certifique-se de usar o formato DD/MM/AAAA.")
-    
-    print("="*40)
-    input("\nPressione Enter para voltar ao menu...")
 
 def adicionar_temporada(catalogo):
     print("----------Modo de adição de temporada----------")
