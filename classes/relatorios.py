@@ -83,3 +83,17 @@ def relatorio_top_series_assistidas(catalogo):
             print(f"{i}º | {item[1]} eps | {item[0]}")
 
     input("\nPressione Enter para continuar...")        
+
+def relatorio_media_genero(catalogo):
+    medias_generos = {}
+    for midia in catalogo:
+        if midia.media > 0 and midia.genero:
+            if midia.genero in medias_generos:
+                medias_generos[midia.genero].append(midia.media)
+            else:
+                medias_generos[midia.genero] = [midia.media]
+    for generos, medias in medias_generos.items():
+        sum(medias) / len(medias) 
+    for generos, medias in medias_generos.items():
+        media_final = sum(medias) / len(medias)
+        print(f'Genero: {generos} | Media: {media_final:.2f}')

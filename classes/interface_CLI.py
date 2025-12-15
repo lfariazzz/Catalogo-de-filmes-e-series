@@ -319,13 +319,15 @@ def exibir_relatorio(catalogo, historico):
     print("\n1 - ⏱️  CÁLCULO DE TEMPO DE TELA")
     print("Descubra quanto tempo você gastou assistindo num período.")
     print("\n2 - 📺  CÁLCULO DE TEMPO DE MÍDIA")
-    print("\nDescubra qual tipo de mídia você mais assiste.")
+    print("Descubra qual tipo de mídia você mais assiste.")
     print("\n3 - ⭐  TOP 10 MÍDIAS")
-    print("\nDescubra quais são as melhores mídias avaliadas do catálogo.")
+    print("Descubra quais são as melhores mídias avaliadas do catálogo.")
     print("\n4 - 🍿  TOP 3 SÉRIES MAIS ASSISTIDAS")
-    print("\nDescubra quais séries você mais tem maratonado.")
+    print("Descubra quais séries você mais tem maratonado.")
+    print("\n5 - 🎬  NOTAS POR GÊNEROS")
+    print("Descubra quais os gêneros mais populares na plataforma.")
 
-    decisao_relatorio = int(input("Qual relatório deseja exibir? "))
+    decisao_relatorio = int(input("\nQual relatório deseja exibir? "))
     
     if decisao_relatorio == 1:
         relatorios.relatorio_tempo_assistido(historico)
@@ -335,6 +337,8 @@ def exibir_relatorio(catalogo, historico):
         relatorios.relatorio_top_midias(catalogo)
     elif decisao_relatorio == 4:
         relatorios.relatorio_top_series_assistidas(catalogo)
+    elif decisao_relatorio == 5:
+        relatorios.relatorio_media_genero(catalogo)
         
 
 def adicionar_temporada(catalogo):
