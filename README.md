@@ -58,6 +58,10 @@ catalogo-de-filmes-e-series/
     ├── midias.json
     ├── usuarios.json
     └── settings.json
+└── tests/                      # Testes parciais e oficais automatizado (Pytest)
+    ├── test_midia.py
+    ├── test_serie.py
+    └── testes_oficiais.py
 ```
 ## 🏗️ Diagrama de Classes
 ```text
@@ -190,5 +194,15 @@ Como o projeto é baseado em CLI, recomenda-se seguir o seguinte fluxo para vali
 - Cadastre dados, encerre o programa com a opção 0 e abra novamente.
 - Verifique se os dados continuam lá.
 
+### 🤖 Testes Automatizados (Pytest)
+Foram implementados **20 testes unitários** cobrindo validações de setters, cálculo de médias e lógica de status de séries.
+
+Para executar:
+1. Instale o framework de testes:
+   ```bash
+   pip install pytest
+2. Rode a bateria de testes:
+    ```bash
+   python -m pytest tests/test_forgeflix.py -v
 ### 👨‍💻 Autor
 **Desenvolvido por Levi Farias 🎓 Engenharia de Software - Universidade Federal do Cariri (UFCA)**
