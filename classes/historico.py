@@ -34,7 +34,15 @@ class Historico:
         midia_totais = 0
         notas_midias = 0
         for midia in catalogo:
-            media_atual = midia.calcular_media() if hasattr(midia, 'calcular_media') else 0
+            media_atual = 0
+            if hasattr(midia, 'calcular_media'):
+                valor = midia.calcular_media()
+                media_atual = valor if valor is not None else 0
+            
+            elif hasattr(midia, 'media'):
+                valor = midia.media
+                media_atual = valor if valor is not None else 0
+
             if media_atual > 0:
                 midia_totais += 1
                 notas_midias += media_atual
