@@ -6,8 +6,8 @@ from classes.episodio import Episodio
 from classes.temporada import Temporada
 from datetime import datetime
 from classes.historico import Historico
-from classes.usuario import Usuario        # <--- Import necessário
-from classes.configuracao import Configuracao # <--- Import necessário
+from classes.usuario import Usuario        
+from classes.configuracao import Configuracao 
 from classes import relatorios
 import dados
 import json
@@ -488,7 +488,6 @@ def gerenciar_listas(usuario, catalogo, usuarios_lista):
         print("❌ Nenhuma lista encontrada. Use a opção 11 para criar.")
         return
 
-    # 1. Selecionar Lista
     print("Suas listas:")
     for i, lista in enumerate(usuario.listas):
         print(f"{i + 1}. {lista.nome} ({len(lista.midias)} itens)")
@@ -499,7 +498,6 @@ def gerenciar_listas(usuario, catalogo, usuarios_lista):
         lista = usuario.listas[idx]
     except: return
 
-    # 2. Menu da Lista
     print(f"\nEditando: {lista.nome}")
     print("1. Adicionar Mídia")
     print("2. Remover Mídia")
