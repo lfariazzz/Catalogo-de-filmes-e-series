@@ -6,9 +6,12 @@ from classes.episodio import Episodio
 from classes.temporada import Temporada
 from datetime import datetime
 from classes.historico import Historico
+from classes.usuario import Usuario        # <--- Import necessário
+from classes.configuracao import Configuracao # <--- Import necessário
 from classes import relatorios
 import dados
 import json
+import sys # Para fechar o programa
 
 def exibir_menu():
     print("-" * 43, "🔥🎬ForgeFlix🎬🔥", "-" * 43)
@@ -37,10 +40,20 @@ def exibir_menu_serie():
 
 def rodar_sistema():
     print("🔄 Carregando dados...")
+    config = Configuracao()
     catalogo = dados.carregar_midias()
     print(f"✅ {len(catalogo)} mídias carregadas na memória.")
 
-    historico = Historico()
+    usuarios = dados.carregar_usuarios(catalogo, config)
+
+    if not usuarios:
+        print("Criando usuário padrão...")
+        usuario_padrao = Usuario(1, "Admin", "admin@forgeflix.com", config)
+        usuarios.append(usuario_padrao)
+
+    usuario_atual = usuarios[0]
+    historico = usuario_atual.historico
+    print(f"👤 Logado como: {usuario_atual.nome}")
 
     exibir_menu()
 

@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "nome": "Tester",
+        "email": "teste@email.com",
+        "listas": [],
+        "historico": {
+            "id": 1,
+            "registros": [
+                {
+                    "midia_titulo": "Matrix",
+                    "status": "ASSISTIDO",
+                    "nota": 10,
+                    "data": "2025-12-16T13:36:58.917366"
+                }
+            ]
+        }
+    }
+]
