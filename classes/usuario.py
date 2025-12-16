@@ -50,10 +50,27 @@ class Usuario:
         """Método responsável pelo recebimento de notas acerca da opinião do usuário sobre alguma instância de mídia"""
         pass
 
+    def registrar_visualizacao(self, midia):
+            """Registra que uma mídia foi concluída na data de hoje"""
+            registro = {
+                "midia": midia,
+                "data_conclusao": date.today()
+            }
+            self.historico.append(registro)
+            print(f"'{midia.titulo}' registrado no histórico!")
+
     def criar_dicionario(self):
         listas_convertidas = []
         for lista in self.listas:
             listas_convertidas.append(lista.criar_dicionario())
+
+        historico_convertido = []
+        if self.historico:
+            for item in self.historico:
+                historico_convertido.append({
+                    "midia_titulo": item["midia"].titulo,
+                    "data_conclusao": item["data_conclusao"].isoformat()
+                })
 
         return {
             "id": self.id,
