@@ -1,8 +1,5 @@
 from classes.registro_visualizacao import RegistroVisualizacao
-from classes.filme import Filme
-from classes.serie import Serie
-from datetime import datetime
-from classes.midia import Midia
+from datetime import datetime, date
 
 class Historico:
     """Classe responsável por receber registros de conclusão de visualização das mídias"""
@@ -26,23 +23,41 @@ class Historico:
     def calcular_tempo_assistido(self, data_inicio, data_fim):
         total_minutos = 0
         for registro in self.registros:
-            if data_inicio <= registro.data_visualizacao and data_fim >= registro.data_visualizacao:
-                total_minutos += registro.midia.tempo_assistido
+            data_reg = registro.data_visualizacao
+            if isinstance(data_reg, datetime):
+                data_reg = data_reg.date()
+            if data_inicio <= data_reg and data_fim >= data_reg:
+                total_minutos += registro.midia.duracao_minutos
         return total_minutos
-    
+
     def media_catalogo(self, catalogo):
         midia_totais = 0
         notas_midias = 0
         for midia in catalogo:
-            if midia.media > 0:
+            media_atual = midia.calcular_media() if hasattr(midia, 'calcular_media') else 0
+            if media_atual > 0:
                 midia_totais += 1
-                notas_midias += midia.media
+                notas_midias += media_atual
+        
         if midia_totais > 0:
             return notas_midias / midia_totais
         else:
             return 0.0
 
-
-    def gerar_relatorio(self):
-        """Método responsável por gerar dados estatísticos acerca da atividade do usuário"""
-        pass
+    def criar_dicionario(self):
+        """Gera o dicionário para salvar no JSON (NOVO!)"""
+        lista_registros_json = []
+        for registro in self.registros:
+            data_formatada = registro.data_visualizacao.isoformat()
+            
+            lista_registros_json.append({
+                "midia_titulo": registro.midia.titulo,
+                "status": registro.status,
+                "nota": registro.nota,
+                "data": data_formatada
+            })
+            
+        return {
+            "id": self.id_historico,
+            "registros": lista_registros_json
+        }

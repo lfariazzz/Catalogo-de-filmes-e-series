@@ -2,6 +2,8 @@ from classes.temporada import Temporada
 from classes.episodio import Episodio
 from classes.serie import Serie
 from classes.filme import Filme
+from classes.historico import Historico
+from classes.registro_visualizacao import RegistroVisualizacao
 from datetime import datetime
 from datetime import date
 from classes.usuario import Usuario
@@ -10,6 +12,7 @@ import json
 import os
 
 CAMINHO = "data/midias.json"
+CAMINHO_USUARIOS = "data/usuarios.json"
 
 def salvar_midias(lista_midias):
     lista_dados = []
@@ -87,84 +90,61 @@ def carregar_midias():
     
 def salvar_usuarios(lista_usuarios):
     dados_formatados = []
-    nova_lista = ListaPersonalizada.criar_dicionario()
-    
     for usuario in lista_usuarios:
-        dicionario_usuario = usuario.criar_dicionario()
-        dados_formatados.append(nova_lista)
+        dados_formatados.append(usuario.criar_dicionario())
     
-    verifica_pasta = os.path.dirname("data/usuarios.json")
-    os.makedirs(verifica_pasta, exist_ok=True)
-
-    try:
-        with open("data/usuarios.json", 'w', encoding='UTF-8') as arquivo:
-            json.dump(dados_formatados, arquivo, indent=4, ensure_ascii=False)
-        print("Usuários salvos com sucesso!")
-    except Exception as e:
-        print(f"Erro ao salvar usuários: {e}")
+    os.makedirs(os.path.dirname(CAMINHO_USUARIOS), exist_ok=True)
+    
+    with open(CAMINHO_USUARIOS, 'w', encoding='UTF-8') as arquivo:
+        json.dump(dados_formatados, arquivo, indent=4, ensure_ascii=False)
+    print("Usuários salvos com sucesso!")
 
 def carregar_usuarios(catalogo, config_sistema):
-    lista_usuarios_formatada = []
-    
+    lista_usuarios = []
     try:
-        with open("data/usuarios.json", 'r', encoding='UTF-8') as arquivo:
+        with open(CAMINHO_USUARIOS, 'r', encoding='UTF-8') as arquivo:
             dados_brutos = json.load(arquivo)
             
-            for usuario_dict in dados_brutos:
-                
-                listas_obj = []
-                for lista in usuario_dict['listas']:
-                    midias = []
-                    for titulo in lista['midias']:
-                        for midia_original in catalogo:
-                            if midia_original.titulo == titulo:
-                                midias.append(midia_original)
-                                break
+            for u_dict in dados_brutos:
+                if 'historico' in u_dict and isinstance(u_dict['historico'], dict):
+                    dados_hist = u_dict['historico']
+                    obj_historico = Historico(id_historico=dados_hist.get('id'))
                     
-                    data_obj = date.fromisoformat(lista['data_criacao'])
-                    
-                    nova_lista = ListaPersonalizada(
-                        lista['id'],
-                        lista['nome'],
-                        lista['descricao'],
-                        data_obj,
-                        midias
-                    )
-                    listas_obj.append(nova_lista)
-
-                historico_obj = []
-                if 'historico' in usuario_dict:
-                    for item_hist in usuario_dict['historico']:
-                    
-                        midia_encontrada = None
+                    for reg in dados_hist.get('registros', []):
+                        midia_obj = None
                         for m in catalogo:
-                            if m.titulo == item_hist['midia_titulo']:
-                                midia_encontrada = m
+                            if m.titulo == reg['midia_titulo']:
+                                midia_obj = m
                                 break
                         
-                        data_hist = date.fromisoformat(item_hist['data_conclusao'])
-                        
-                        if midia_encontrada:
-                            historico_obj.append({
-                                "midia": midia_encontrada,
-                                "data_conclusao": data_hist
-                            })
+                        if midia_obj:
+                            data_reg = datetime.fromisoformat(reg['data'])
+                            novo_reg = RegistroVisualizacao(midia_obj, reg['status'], reg['nota'], data_reg)
+                            obj_historico.registros.append(novo_reg)
+                else:
+                    obj_historico = Historico()
 
-                novo_usuario = Usuario(
-                    usuario_dict['id'],
-                    usuario_dict['nome'],
-                    usuario_dict['email'],
-                    config_sistema,
+                listas_obj = []
+                for l_dict in u_dict['listas']:
+                    midias_lista = []
+                    for titulo in l_dict['midias']:
+                        for m in catalogo:
+                            if m.titulo == titulo:
+                                midias_lista.append(m)
+                                break
+                    data_lista = date.fromisoformat(l_dict['data_criacao'])
+                    listas_obj.append(ListaPersonalizada(l_dict['id'], l_dict['nome'], l_dict['descricao'], data_lista, midias_lista))
+
+                novo_user = Usuario(
+                    u_dict['id'], u_dict['nome'], u_dict['email'], config_sistema,
                     listas=listas_obj,
-                    historico=historico_obj
+                    historico=obj_historico
                 )
-                lista_usuarios_formatada.append(novo_usuario)
-                
-        return lista_usuarios_formatada
+                lista_usuarios.append(novo_user)
 
+        return lista_usuarios
     except FileNotFoundError:
-        print("Arquivo de usuários não encontrado. Iniciando vazio.")
         return []
     except Exception as e:
-        print(f"Erro ao ler usuários: {e}")
+        print(f"Erro ao carregar usuários: {e}")
         return []
