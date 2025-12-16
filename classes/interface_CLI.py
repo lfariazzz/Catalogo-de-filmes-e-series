@@ -69,7 +69,7 @@ def rodar_sistema():
             continue
 
         if decisao == 0:
-            encerrar_programa()
+            encerrar_programa(usuarios)
             break
         elif decisao == 1:
             exibir_catalogo(catalogo)
@@ -471,5 +471,8 @@ def atualizar_episodio(catalogo, historico):
         print("❌ ID da série não encontrado no catálogo.")
 
 #0
-def encerrar_programa():
-    pass
+def encerrar_programa(lista_usuarios):
+    print("💾 Salvando dados do usuário e histórico...")
+    dados.salvar_usuarios(lista_usuarios)
+    print("👋 Programa encerrado. Até mais!")
+    sys.exit()
