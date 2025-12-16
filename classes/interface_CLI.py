@@ -28,7 +28,7 @@ def exibir_menu():
     print("7. Exibir menu de séries")
     print("-" * 30, "👤Comandos de Usuário👤", "-" * 30)
     print("11. Criar Lista personalizada de um Usuário")
-    print("12. Adicionar mídia à lista")
+    print("12. Gerenciar minhas listas")
     print("0. Encerrar programa")
 
 def exibir_menu_serie():
@@ -91,6 +91,10 @@ def rodar_sistema():
             adicionar_episodio(catalogo)
         elif decisao == 10:
             atualizar_episodio(catalogo, historico)
+        elif decisao == 11:
+            criar_nova_lista(usuario_atual, usuarios)
+        elif decisao == 12:
+            gerenciar_listas(usuario_atual, catalogo, usuarios)
         else:
             print("Digite uma opção válida")
 
@@ -470,6 +474,79 @@ def atualizar_episodio(catalogo, historico):
     if not serie_encontrada:
         print("❌ ID da série não encontrado no catálogo.")
 
+def criar_nova_lista(usuario, usuarios_lista):
+    print("\n📂 CRIAR NOVA LISTA")
+    nome = input("Nome da lista (ex: Terror, Maratona): ")
+    descricao = input("Descrição da lista: ")
+    usuario.criar_lista(nome, descricao)
+    dados.salvar_usuarios(usuarios_lista)
+    print(f"✅ Lista '{nome}' criada!")
+
+def gerenciar_listas(usuario, catalogo, usuarios_lista):
+    print("\n📝 GERENCIAR LISTAS")
+    if not usuario.listas:
+        print("❌ Nenhuma lista encontrada. Use a opção 11 para criar.")
+        return
+
+    # 1. Selecionar Lista
+    print("Suas listas:")
+    for i, lista in enumerate(usuario.listas):
+        print(f"{i + 1}. {lista.nome} ({len(lista.midias)} itens)")
+    
+    try:
+        idx = int(input("Escolha o número da lista para editar: ")) - 1
+        if idx < 0 or idx >= len(usuario.listas): return
+        lista = usuario.listas[idx]
+    except: return
+
+    # 2. Menu da Lista
+    print(f"\nEditando: {lista.nome}")
+    print("1. Adicionar Mídia")
+    print("2. Remover Mídia")
+    print("3. Ver itens da lista")
+    acao = input("Escolha: ")
+
+    if acao == "1":
+        busca = input("Digite o nome (ou parte) da mídia para buscar: ").lower()
+        res = [m for m in catalogo if busca in m.titulo.lower()]
+        
+        if not res: print("Nada encontrado.")
+        else:
+            print("\nResultados:")
+            for m in res: print(f"ID: {m.id} | {m.titulo} ({m.ano})")
+            
+            try:
+                midia_id = int(input("Digite o ID da mídia para adicionar: "))
+                midia = next((m for m in res if m.id == midia_id), None)
+                if midia and lista.adicionar_midia(midia):
+                    dados.salvar_usuarios(usuarios_lista)
+                    print(f"✅ '{midia.titulo}' adicionado à lista!")
+                else: print("⚠️ Erro: Mídia inválida ou já existente na lista.")
+            except: pass
+
+    elif acao == "2":
+        if not lista.midias:
+            print("A lista está vazia.")
+            return
+
+        print("\nItens na lista:")
+        for m in lista.midias:
+            print(f"ID: {m.id} | {m.titulo}")
+            
+        try:
+            midia_id = int(input("Digite o ID da mídia para remover: "))
+            midia = next((m for m in lista.midias if m.id == midia_id), None)
+            
+            if midia and lista.remover_midia(midia):
+                dados.salvar_usuarios(usuarios_lista)
+                print(f"🗑️ '{midia.titulo}' removido da lista.")
+            else: print("❌ Mídia não encontrada nesta lista.")
+        except: pass
+
+    elif acao == "3":
+        print(f"\n--- {lista.nome} ---")
+        if not lista.midias: print("(Vazia)")
+        for m in lista.midias: print(f"• {m.titulo}")
 #0
 def encerrar_programa(lista_usuarios):
     print("💾 Salvando dados do usuário e histórico...")

@@ -3,7 +3,17 @@
         "id": 1,
         "nome": "Tester",
         "email": "teste@email.com",
-        "listas": [],
+        "listas": [
+            {
+                "id": 1,
+                "nome": "Maratona",
+                "descricao": "Filmes para assistir sem parar",
+                "data_criacao": "2025-12-16",
+                "midias": [
+                    "Game of Thrones"
+                ]
+            }
+        ],
         "historico": {
             "id": 1,
             "registros": [
