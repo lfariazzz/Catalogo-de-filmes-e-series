@@ -49,3 +49,16 @@ class Usuario:
     def avaliar_midia(self, midia, nota):
         """Método responsável pelo recebimento de notas acerca da opinião do usuário sobre alguma instância de mídia"""
         pass
+
+    def criar_dicionario(self):
+        listas_convertidas = []
+        for lista in self.listas:
+            listas_convertidas.append(lista.criar_dicionario())
+
+        return {
+            "id": self.id,
+            "nome": self.nome, 
+            "email": self.email, 
+            "listas": listas_convertidas,
+            "historico": self.historico if self.historico is not None else []
+        }
