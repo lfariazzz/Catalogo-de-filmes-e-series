@@ -6,28 +6,28 @@ O **ForgeFlix** é uma aplicação em Python (CLI) desenvolvida como Trabalho da
 
 ---
 
-## ⚙️ Funcionalidades
+## ⚙️ Funcionalidades e Decisões de Implementação
 
-### 🎞️ Gestão de Catálogo (CRUD)
-- **Filmes:** Cadastro completo com validação de gênero, ano e notas (0-10).
-- **Séries:** Estrutura hierárquica robusta (`Série` → `Temporadas` → `Episódios`).
-- **Polimorfismo:** O cálculo de duração e média de notas comporta-se de maneira diferente para Filmes (direto) e Séries (agregado dos episódios).
+### 🏛️ Arquitetura Orientada a Objetos
+O sistema foi projetado para maximizar o reaproveitamento de código e representar fielmente as relações do mundo real:
+- **Herança e Abstração:** A classe abstrata `Midia` define o contrato base (ID, Título, Ano). `Filme` e `Série` herdam dessa base, especializando comportamentos.
+- **Composição Forte:** Em vez de listas simples, adotou-se uma estrutura de composição para Séries: `Série` contém objetos `Temporada`, que contêm objetos `Episódio`. Isso permite controle granular de status e notas por episódio individual.
+- **Polimorfismo:** Métodos como o cálculo de duração e média de notas comportam-se de forma distinta: para filmes é um valor fixo/direto; para séries, é o resultado de uma iteração recursiva sobre seus episódios.
 
-### 🧠 Regras de Negócio (Encapsulamento)
-- **Status Automático:** O sistema impede inconsistências. Uma série só é marcada como "ASSISTIDO" se todos os seus episódios estiverem concluídos.
-- **Proteção de Dados:** Uso de *Properties* e *Setters* para garantir que não entrem dados inválidos (ex: notas negativas, strings vazias ou datas futuras).
+### 🛡️ Integridade e Encapsulamento (Regras de Negócio)
+- **Validação via Setters:** Todos os dados de entrada passam por *Setters* rigorosos. O sistema rejeita ativamente estados inválidos (ex: notas fora do intervalo 0-10, anos negativos ou strings vazias), garantindo que apenas dados "limpos" cheguem à camada de persistência.
+- **Máquina de Estados de Status:** O status de uma Série (*Não Assistido, Assistindo, Assistido*) não é arbitrário. Ele é calculado dinamicamente com base na proporção de episódios concluídos, impedindo inconsistências lógicas.
 
-### 👤 Perfil do Usuário
-- **Listas Personalizadas:** Criação de listas temáticas (ex: "Maratona de Terror") com adição/remoção dinâmica de mídias do catálogo.
-- **Histórico Inteligente:** Ao finalizar uma mídia, o sistema grava automaticamente a data, a nota atribuída e o status.
-- **Configurações:** Singleton que carrega parâmetros globais (como limites do sistema) via `settings.json`.
+### 💾 Estratégia de Persistência e Otimização
+- **Banco de Dados em JSON:** O sistema utiliza arquivos JSON para persistência, simulando um banco NoSQL documental.
+- **Normalização de Dados:** Para evitar redundância e circularidade, o arquivo `usuarios.json` armazena apenas as **referências** (títulos) das mídias no histórico e nas listas, e não os objetos inteiros.
+- **Reconstrução de Objetos (Linkagem):** Durante a inicialização (`boot`), o sistema realiza uma varredura para reconectar os históricos dos usuários aos objetos reais do catálogo carregados na memória, garantindo acesso imediato a propriedades atualizadas das mídias.
 
-### 📊 Relatórios (Business Intelligence)
-O módulo de relatórios cruza dados do histórico e do catálogo para gerar:
-1.  **Tempo de Tela:** Total de horas/minutos assistidos em um período.
-2.  **Preferência de Formato:** Gráfico comparativo entre Filmes vs. Séries.
-3.  **Ranking:** Top 10 mídias melhor avaliadas e Top 3 séries mais maratonadas.
-
+### 📊 Inteligência de Dados (Relatórios)
+O módulo de relatórios utiliza manipulação de datas e algoritmos de ordenação para gerar *insights*:
+1.  **Tempo de Tela (Time-Window):** Filtra o histórico com base em objetos `datetime`, permitindo saber exatamente quantos minutos foram consumidos em um intervalo de datas específico.
+2.  **Ranking e Comparativos:** Utiliza ordenação de listas via métodos mágicos (`__lt__`) para gerar rankings de qualidade e preferência de formato (Filmes vs. Séries).
+3.  **Singleton de Configuração:** As regras globais (como limites de listas) são geridas por uma classe Singleton, centralizando a parametrização do sistema.
 ---
 
 ## 🧱 Estrutura do Projeto
@@ -135,10 +135,60 @@ Python 3.10 ou superior.
 - O sistema identificará a ausência de dados e criará um usuário Admin padrão.
 - Os arquivos JSON serão criados automaticamente na pasta data/ na primeira execução.
 
-### 💾 Persistência de Dados
-O sistema utiliza arquivos JSON para manter o estado entre execuções:
+### 💻 Exemplos de Uso
+**1. Adicionando um Filme**
+```text
+O que deseja fazer? 2
+------------------------------ Este é modo de adição ------------------------------
+Digite o título da mídia: Matrix
+Digite o ano da mídia: 1999
+Deseja criar um (1) filme ou uma (2) série? 1
+Digite o gênero da mídia: Ficção Científica
+Digite a duração (em minutos): 136
+Digite a classificação indicativa: 14
+Deseja adicionar o elenco? (1) Sim (2) Não: 2
+Mídia adicionada ao catálogo!
+```
+**2. Gerando Relatório de Tempo de Tela**
+```text
+O que deseja fazer? 6
+========================================
+      📊 RELATÓRIOS DO CATÁLOGO      
+========================================
+1 - ⏱️  CÁLCULO DE TEMPO DE TELA
+...
+Qual relatório deseja exibir? 1
+----------------------------------------
+   ⏱️  RELATÓRIO DE TEMPO DE TELA
+----------------------------------------
+Digite as datas no formato dia/mês/ano
+Data Inicial: 01/01/2024
+Data Final:   31/12/2024
 
-Relacionamentos: O sistema reconstrói as ligações entre objetos (ex: Histórico → Mídia) através de buscas por título durante o carregamento, garantindo integridade referencial na memória sem duplicar dados pesados nos arquivos de usuário.
+✅ Resultados:
+   Total assistido: 2500 minutos
+   Equivalente a:   41h 40min
+```
+
+### 🧪 Roteiro de Testes Manuais
+Como o projeto é baseado em CLI, recomenda-se seguir o seguinte fluxo para validar as funcionalidades principais:
+
+**1. Teste de Cadastro:**
+**- Adicione um filme com ano inválido (ex: 1800) -> O sistema deve barrar.
+- Adicione uma série sem temporadas e verifique se ela aparece no catálogo.
+
+**2. Teste de Avaliação:**
+- Avalie uma mídia com nota 11 -> O sistema deve exibir erro.
+- Avalie com nota 8.5 -> A média da mídia deve ser atualizada.
+
+**3. Teste de Hierarquia (Séries):**
+- Adicione uma Série -> Adicione Temporada 1 -> Adicione Episódio 1.
+- Marque o Episódio 1 como "ASSISTIDO".
+- Verifique se o status da Série mudou para "ASSISTINDO" ou "ASSISTIDO" (dependendo da quantidade de episódios).
+
+**4. Teste de Persistência:**
+- Cadastre dados, encerre o programa com a opção 0 e abra novamente.
+- Verifique se os dados continuam lá.
 
 ### 👨‍💻 Autor
 **Desenvolvido por Levi Farias 🎓 Engenharia de Software - Universidade Federal do Cariri (UFCA)**
